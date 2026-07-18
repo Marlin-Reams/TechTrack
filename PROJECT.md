@@ -371,3 +371,25 @@ A successful TechTrack feature:
 When unsure:
 
 Choose the solution that keeps the codebase cleaner five years from now—not the one that is quickest today.
+
+
+
+# Definition of Done
+
+A feature is considered complete only when all of the following have been satisfied:
+
+- UI is implemented.
+- Business logic is implemented.
+- Repository is implemented.
+- Validation is implemented.
+- Firestore rules support the feature.
+- Offline behavior has been verified.
+- Error handling has been implemented.
+- Loading states have been implemented.
+- Types are complete.
+- Tests (where appropriate) have been written.
+- Documentation has been updated.
+- The project builds successfully.
+- Changes are committed to Git.
+
+Only then should the project move to the next feature.

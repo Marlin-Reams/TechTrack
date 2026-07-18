@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { logout } from "../services/authService";
+import { logout } from "../features/auth/services/authService";
 
 async function handleLogout() {
   await logout();
