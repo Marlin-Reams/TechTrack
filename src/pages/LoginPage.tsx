@@ -1,0 +1,56 @@
+import { useState } from "react";
+import { login } from "../services/authService";
+
+function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  try {
+    await login(email, password);
+  } catch (error) {
+    console.error(error);
+  }
+}
+  return (
+    <main>
+      <h1>TechTrack Login</h1>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <button type="submit">
+          Sign In
+        </button>
+      </form>
+    </main>
+  );
+}
+
+export default LoginPage;
