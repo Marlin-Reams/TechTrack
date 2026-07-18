@@ -1,75 +1,140 @@
-# React + TypeScript + Vite
+# TechTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, production-quality web application built for professional automotive technicians.
 
-Currently, two official plugins are available:
+TechTrack is designed to streamline the daily workflow of technicians by combining repair order management, customer and vehicle tracking, diagnostics, inspections, productivity tools, and AI-assisted troubleshooting into a single platform.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Vision
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Our goal is to build the ultimate productivity platform for automotive technicians and independent repair shops.
 
-## Expanding the ESLint configuration
+TechTrack emphasizes:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Fast workflows
+- Clean user experience
+- Reliable data
+- Scalable architecture
+- AI-assisted diagnostics
+- Long-term maintainability
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Planned Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Shop Management
 
+- Repair Orders
+- Customers
+- Vehicles
+- Digital Vehicle Inspections
+- Labor Tracking
+- Technician Notes
+
+### Productivity
+
+- Dashboard
+- Daily Work Queue
+- Vehicle History
+- Search
+- Reporting
+- Analytics
+
+### AI
+
+- Diagnostic Assistant
+- Symptom Analysis
+- Guided Troubleshooting
+- Repair Suggestions
+
+---
+
+## Technology
+
+Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router
+
+Backend
+
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage
+- Firebase Hosting
+
+---
+
+## Current Status
+
+Current Version
+
+**v0.1.0 — Foundation Complete**
+
+Current Progress
+
+- ✅ Application architecture
+- ✅ Authentication
+- ✅ Routing
+- ✅ Firebase integration
+- ✅ Production deployment
+
+Business feature development begins next.
+
+---
+
+## Documentation
+
+Additional documentation is available in:
+
+- `PROJECT.md` — Project architecture and development standards
+- `CHANGELOG.md` — Project release history
+
+---
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Deploy to Firebase:
+
+```bash
+npm run deploy
+```
+
+---
+
+## Philosophy
+
+TechTrack is built with a simple philosophy:
+
+> Build software that remains understandable, maintainable, and extensible years after the first line of code is written.
+
+Every architectural decision is made with long-term maintainability in mind.
+
+---
+
+## License
+
+Copyright © 2026 TechTrack.
+
+All rights reserved.
