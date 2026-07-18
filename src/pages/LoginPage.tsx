@@ -2,55 +2,59 @@ import { useState } from "react";
 import { login } from "../features/auth/services/authService";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSigningIn, setIsSigningIn] = useState(false);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault();
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
 
-  try {
-    await login(email, password);
-  } catch (error) {
-    console.error(error);
-  }
-}
-  return (
-    <main>
-      <h1>TechTrack Login</h1>
+        setIsSigningIn(true);
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        try {
+            await login(email, password);
+        } catch (error) {
+            console.error(error);
+            setIsSigningIn(false);
+        }
+    }
+    return (
+        <main>
+            <h1>TechTrack Login</h1>
 
-        <br />
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <br />
+                    <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+                <br />
 
-        <br />
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <br />
+                    <input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
 
-        <button type="submit">
-          Sign In
-        </button>
-      </form>
-    </main>
-  );
+                <br />
+
+                <button type="submit" disabled={isSigningIn}>
+                    {isSigningIn ? "Signing In..." : "Sign In"}
+                </button>
+            </form>
+        </main>
+    );
 }
 
 export default LoginPage;
