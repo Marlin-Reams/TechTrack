@@ -7,24 +7,26 @@ async function handleLogout() {
 
 function AppLayout() {
   return (
-  <div>
-    <header>
-      <h1>TechTrack</h1>
+    <div className="app-layout">
+      <header>
+        <h1>TechTrack</h1>
 
-      <button onClick={handleLogout}>
-        Sign Out
-      </button>
-    </header>
+        <button onClick={handleLogout}>
+          Sign Out
+        </button>
+      </header>
 
-    <nav>
-      <Link to="/">Dashboard</Link>
-    </nav>
+      <div className="app-body">
+        <nav>
+          <Link to="/">Dashboard</Link>
+        </nav>
 
-    <main>
-      <Outlet />
-    </main>
-  </div>
-);
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 }
 
 export default AppLayout;
