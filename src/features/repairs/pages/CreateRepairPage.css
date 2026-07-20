@@ -1,0 +1,13 @@
+.create-repair-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.create-repair-page h1 {
+    margin: 0;
+}
+
+.create-repair-page p {
+    color: #666;
+}

@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { logout } from "../features/auth/services/authService";
+import Sidebar from "../components/common/Sidebar";
 
 async function handleLogout() {
   await logout();
@@ -17,9 +18,7 @@ function AppLayout() {
       </header>
 
       <div className="app-body">
-        <nav>
-          <Link to="/">Dashboard</Link>
-        </nav>
+        <Sidebar />
 
         <main>
           <Outlet />

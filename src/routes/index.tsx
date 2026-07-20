@@ -10,6 +10,8 @@ import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
+import CreateRepairPage from "../features/repairs/pages/CreateRepairPage";
+
 const router = createBrowserRouter([
   {
     element: <PublicRoute />,
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
           {
             path: "/",
             element: <DashboardPage />,
+          },
+          {
+            path: "/repairs/new",
+            element: <CreateRepairPage />,
           },
         ],
       },

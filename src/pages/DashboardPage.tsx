@@ -1,16 +1,23 @@
-import DashboardCard from "../features/dashboard/components/DashboardCard";
+import WeeklyPerformanceCard from "../features/dashboard/components/WeeklyPerformanceCard";
+import WorkloadCard from "../features/dashboard/components/WorkloadCars";
 
 function DashboardPage() {
   return (
-    <main>
+    <>
       <h1>Dashboard</h1>
 
-      <p>Welcome back!</p>
+      <div className="dashboard-grid">
+        <WeeklyPerformanceCard
+          flagHours={28.4}
+          goal={50}
+        />
 
-      <DashboardCard title="Weekly Performance">
-        <p>Flag Hours: 0.0</p>
-      </DashboardCard>
-    </main>
+         <WorkloadCard
+    repairOrders={14}
+    flagHours={28.4}
+  />
+      </div>
+    </>
   );
 }
 

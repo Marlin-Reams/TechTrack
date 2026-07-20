@@ -1,0 +1,20 @@
+.workload-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.metric p {
+  margin-top: .5rem;
+  color: #666;
+}

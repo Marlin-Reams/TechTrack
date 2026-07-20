@@ -1,0 +1,19 @@
+.weekly-performance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weekly-performance h1 {
+    font-size: 3.5rem;
+    margin: 0;
+}
+
+.weekly-performance p {
+    margin: 0;
+}
+
+.weekly-performance progress {
+    width: 100%;
+}
