@@ -1,13 +1,14 @@
 import "./CreateRepairPage.css";
 
+import RepairHeader from "../repair-header/components/RepairHeader";
+import OperationsSection from "../operations/components/OperationsSection";
+
 export default function CreateRepairPage() {
     return (
-        <div className="create-repair-page">
-            <h1>New Repair</h1>
+        <main className="create-repair-page">
+            <RepairHeader />
 
-            <p>
-                Start documenting a repair.
-            </p>
-        </div>
+            <OperationsSection />
+        </main>
     );
 }

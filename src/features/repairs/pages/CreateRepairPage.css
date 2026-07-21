@@ -1,13 +1,25 @@
 .create-repair-page {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 24px;
 }
 
 .create-repair-page h1 {
     margin: 0;
 }
 
-.create-repair-page p {
+.repair-card {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.repair-card h2 {
+    margin-top: 0;
+}
+
+.repair-card p {
     color: #666;
 }

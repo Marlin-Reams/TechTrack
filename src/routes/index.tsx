@@ -6,9 +6,9 @@ import PublicLayout from "../layouts/PublicLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 
-import DashboardPage from "../pages/DashboardPage";
-import LoginPage from "../pages/LoginPage";
-import NotFoundPage from "../pages/NotFoundPage";
+import DashboardPage from "../features/dashboard/pages/DashboardPage";
+import LoginPage from "../features/dashboard/pages/LoginPage";
+import NotFoundPage from "../features/dashboard/pages/NotFoundPage";
 
 import CreateRepairPage from "../features/repairs/pages/CreateRepairPage";
 

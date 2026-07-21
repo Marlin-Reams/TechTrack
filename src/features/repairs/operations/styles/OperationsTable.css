@@ -1,0 +1,58 @@
+.operations-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+}
+
+.operations-table th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #d9d9d9;
+    font-weight: 600;
+}
+
+.operations-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ececec;
+}
+
+.operations-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.operations-table tfoot td {
+    font-weight: 700;
+    border-top: 2px solid #444;
+    border-bottom: none;
+    background: #fafafa;
+}
+
+.operations-table tfoot td:first-child {
+    text-align: right;
+}
+
+.operations-empty {
+    text-align: center;
+    color: #777;
+    padding: 30px;
+}
+
+.operation-delete {
+    display: flex;
+    justify-content: center;
+}
+
+.operation-delete button {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: all 0.2s ease;
+}
+
+.operation-delete button:hover {
+    opacity: 1;
+    transform: scale(1.15);
+    color: #dc2626;
+}

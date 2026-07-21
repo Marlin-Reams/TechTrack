@@ -1,5 +1,5 @@
-import WeeklyPerformanceCard from "../features/dashboard/components/WeeklyPerformanceCard";
-import WorkloadCard from "../features/dashboard/components/WorkloadCars";
+import WeeklyPerformanceCard from "../cards/WeeklyPerformanceCard";
+import WorkloadCard from "../cards/WorkloadCars";
 
 function DashboardPage() {
   return (

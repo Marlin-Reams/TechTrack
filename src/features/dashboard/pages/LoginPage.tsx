@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { login } from "../features/auth/services/authService";
+import { login } from "../../auth/services/authService";
 
 function LoginPage() {
     const [email, setEmail] = useState("");
