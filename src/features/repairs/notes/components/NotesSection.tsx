@@ -1,4 +1,4 @@
-import "../styles/NotesSection.css";
+import "./NotesSection.css";
 
 import useNotes from "../hooks/useNotes";
 
