@@ -1,12 +1,28 @@
 import "./NotesSection.css";
 
-import useNotes from "../hooks/useNotes";
+import type { Dispatch, SetStateAction } from "react";
 
-export default function NotesSection() {
-    const {
-        note,
-        updateNote,
-    } = useNotes();
+import type { RepairNote } from "../types/RepairNote";
+import type { RepairRecord } from "../../repair-entry/types/RepairRecord";
+
+type NotesSectionProps = {
+    note: RepairNote;
+    setRepairRecord: Dispatch<SetStateAction<RepairRecord>>;
+};
+
+export default function NotesSection({
+    note,
+    setRepairRecord,
+}: NotesSectionProps) {
+
+    function updateNote(content: string) {
+        setRepairRecord((previous) => ({
+            ...previous,
+            notes: {
+                content,
+            },
+        }));
+    }
 
     return (
         <section className="notes-section">

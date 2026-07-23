@@ -28,7 +28,10 @@ export default function CreateRepairPage() {
 
             <OperationsSection />
 
-            <NotesSection />
+            <NotesSection
+                note={repairRecord.notes}
+                setRepairRecord={setRepairRecord}
+            />
 
             <AttachmentsSection />
 
