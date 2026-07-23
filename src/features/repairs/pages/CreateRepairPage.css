@@ -1,7 +1,8 @@
 .create-repair-page {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
+    max-width: 1100px;
 }
 
 .create-repair-page h1 {

@@ -1,3 +1,5 @@
+import "./RepairHeader.css";
+
 import useRepairHeader from "../hooks/useRepairHeader";
 
 export default function RepairHeader() {
@@ -15,102 +17,106 @@ export default function RepairHeader() {
     } = useRepairHeader();
 
     return (
-        <section>
+        <section className="repair-header">
             <h2>Repair Details</h2>
 
-            <div>
-                <label>Repair Order #</label>
+            <div className="repair-header-grid">
 
-                <input
-                    value={header.repairOrderNumber}
-                    onChange={(e) =>
-                        updateRepairOrderNumber(e.target.value)
-                    }
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Repair Order #</label>
 
-            <div>
-                <label>VIN</label>
+                    <input
+                        value={header.repairOrderNumber}
+                        onChange={(e) =>
+                            updateRepairOrderNumber(e.target.value)
+                        }
+                    />
+                </div>
 
-                <input
-                    value={header.vin}
-                    onChange={(e) => updateVin(e.target.value)}
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Repair Date</label>
 
-            <div>
-                <label>License Plate</label>
+                    <input
+                        type="date"
+                        value={header.repairDate}
+                        onChange={(e) =>
+                            updateRepairDate(e.target.value)
+                        }
+                    />
+                </div>
 
-                <input
-                    value={header.licensePlate}
-                    onChange={(e) =>
-                        updateLicensePlate(e.target.value)
-                    }
-                />
-            </div>
+                <div className="repair-header-field repair-header-field--full">
+                    <label>VIN</label>
 
-            <div>
-                <label>Year</label>
+                    <input
+                        value={header.vin}
+                        onChange={(e) => updateVin(e.target.value)}
+                    />
+                </div>
 
-                <input
-                    value={header.year}
-                    onChange={(e) => updateYear(e.target.value)}
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>License Plate</label>
 
-            <div>
-                <label>Make</label>
+                    <input
+                        value={header.licensePlate}
+                        onChange={(e) =>
+                            updateLicensePlate(e.target.value)
+                        }
+                    />
+                </div>
 
-                <input
-                    value={header.make}
-                    onChange={(e) => updateMake(e.target.value)}
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Mileage</label>
 
-            <div>
-                <label>Model</label>
+                    <input
+                        type="number"
+                        value={header.mileage ?? ""}
+                        onChange={(e) =>
+                            updateMileage(
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value)
+                            )
+                        }
+                    />
+                </div>
 
-                <input
-                    value={header.model}
-                    onChange={(e) => updateModel(e.target.value)}
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Year</label>
 
-            <div>
-                <label>Engine</label>
+                    <input
+                        value={header.year}
+                        onChange={(e) => updateYear(e.target.value)}
+                    />
+                </div>
 
-                <input
-                    value={header.engine}
-                    onChange={(e) => updateEngine(e.target.value)}
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Make</label>
 
-            <div>
-                <label>Mileage</label>
+                    <input
+                        value={header.make}
+                        onChange={(e) => updateMake(e.target.value)}
+                    />
+                </div>
 
-                <input
-                    type="number"
-                    value={header.mileage ?? ""}
-                    onChange={(e) =>
-                        updateMileage(
-                            e.target.value === ""
-                                ? null
-                                : Number(e.target.value)
-                        )
-                    }
-                />
-            </div>
+                <div className="repair-header-field">
+                    <label>Model</label>
 
-            <div>
-                <label>Repair Date</label>
+                    <input
+                        value={header.model}
+                        onChange={(e) => updateModel(e.target.value)}
+                    />
+                </div>
 
-                <input
-                    type="date"
-                    value={header.repairDate}
-                    onChange={(e) =>
-                        updateRepairDate(e.target.value)
-                    }
-                />
+                <div className="repair-header-field">
+                    <label>Engine</label>
+
+                    <input
+                        value={header.engine}
+                        onChange={(e) => updateEngine(e.target.value)}
+                    />
+                </div>
+
             </div>
         </section>
     );
