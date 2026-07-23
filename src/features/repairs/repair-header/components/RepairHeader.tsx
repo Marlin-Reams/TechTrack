@@ -1,20 +1,31 @@
 import "./RepairHeader.css";
 
-import useRepairHeader from "../hooks/useRepairHeader";
+import type { Dispatch, SetStateAction } from "react";
 
-export default function RepairHeader() {
-    const {
-        header,
-        updateRepairOrderNumber,
-        updateVin,
-        updateLicensePlate,
-        updateYear,
-        updateMake,
-        updateModel,
-        updateEngine,
-        updateMileage,
-        updateRepairDate,
-    } = useRepairHeader();
+import type { RepairHeader as RepairHeaderModel } from "../types/RepairHeader";
+import type { RepairRecord } from "../../repair-entry/types/RepairRecord";
+
+type RepairHeaderProps = {
+    header: RepairHeaderModel;
+    setRepairRecord: Dispatch<SetStateAction<RepairRecord>>;
+};
+
+export default function RepairHeader({
+    header,
+    setRepairRecord,
+}: RepairHeaderProps) {
+    function updateHeader<K extends keyof RepairHeaderModel>(
+        key: K,
+        value: RepairHeaderModel[K]
+    ) {
+        setRepairRecord((previous) => ({
+            ...previous,
+            header: {
+                ...previous.header,
+                [key]: value,
+            },
+        }));
+    }
 
     return (
         <section className="repair-header">
@@ -28,7 +39,7 @@ export default function RepairHeader() {
                     <input
                         value={header.repairOrderNumber}
                         onChange={(e) =>
-                            updateRepairOrderNumber(e.target.value)
+                            updateHeader("repairOrderNumber", e.target.value)
                         }
                     />
                 </div>
@@ -40,7 +51,7 @@ export default function RepairHeader() {
                         type="date"
                         value={header.repairDate}
                         onChange={(e) =>
-                            updateRepairDate(e.target.value)
+                            updateHeader("repairDate", e.target.value)
                         }
                     />
                 </div>
@@ -50,7 +61,9 @@ export default function RepairHeader() {
 
                     <input
                         value={header.vin}
-                        onChange={(e) => updateVin(e.target.value)}
+                        onChange={(e) =>
+                            updateHeader("vin", e.target.value)
+                        }
                     />
                 </div>
 
@@ -60,7 +73,7 @@ export default function RepairHeader() {
                     <input
                         value={header.licensePlate}
                         onChange={(e) =>
-                            updateLicensePlate(e.target.value)
+                            updateHeader("licensePlate", e.target.value)
                         }
                     />
                 </div>
@@ -72,7 +85,8 @@ export default function RepairHeader() {
                         type="number"
                         value={header.mileage ?? ""}
                         onChange={(e) =>
-                            updateMileage(
+                            updateHeader(
+                                "mileage",
                                 e.target.value === ""
                                     ? null
                                     : Number(e.target.value)
@@ -86,7 +100,9 @@ export default function RepairHeader() {
 
                     <input
                         value={header.year}
-                        onChange={(e) => updateYear(e.target.value)}
+                        onChange={(e) =>
+                            updateHeader("year", e.target.value)
+                        }
                     />
                 </div>
 
@@ -95,7 +111,9 @@ export default function RepairHeader() {
 
                     <input
                         value={header.make}
-                        onChange={(e) => updateMake(e.target.value)}
+                        onChange={(e) =>
+                            updateHeader("make", e.target.value)
+                        }
                     />
                 </div>
 
@@ -104,7 +122,9 @@ export default function RepairHeader() {
 
                     <input
                         value={header.model}
-                        onChange={(e) => updateModel(e.target.value)}
+                        onChange={(e) =>
+                            updateHeader("model", e.target.value)
+                        }
                     />
                 </div>
 
@@ -113,7 +133,9 @@ export default function RepairHeader() {
 
                     <input
                         value={header.engine}
-                        onChange={(e) => updateEngine(e.target.value)}
+                        onChange={(e) =>
+                            updateHeader("engine", e.target.value)
+                        }
                     />
                 </div>
 

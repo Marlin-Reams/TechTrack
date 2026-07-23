@@ -11,9 +11,8 @@ import { createRepairRecord } from "../repair-entry/services/repairFactory";
 import type { RepairRecord } from "../repair-entry/types/RepairRecord";
 
 export default function CreateRepairPage() {
-    const [repairRecord] = useState<RepairRecord>(
-        createRepairRecord()
-    );
+    const [repairRecord, setRepairRecord] =
+        useState<RepairRecord>(createRepairRecord());
 
     function handleSaveRepair() {
         console.log(repairRecord);
@@ -22,7 +21,10 @@ export default function CreateRepairPage() {
     return (
         <main className="create-repair-page">
 
-            <RepairHeader />
+            <RepairHeader
+                header={repairRecord.header}
+                setRepairRecord={setRepairRecord}
+            />
 
             <OperationsSection />
 
