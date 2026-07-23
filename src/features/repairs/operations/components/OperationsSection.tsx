@@ -1,4 +1,4 @@
-import "./OperationsSection.css";
+import "../styles/OperationsSection.css";
 
 import OperationsEditor from "./OperationsEditor";
 import OperationsTable from "./OperationsTable";
