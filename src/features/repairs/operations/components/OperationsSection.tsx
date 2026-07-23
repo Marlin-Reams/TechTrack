@@ -1,3 +1,5 @@
+import "./OperationsSection.css";
+
 import OperationsEditor from "./OperationsEditor";
 import OperationsTable from "./OperationsTable";
 import useOperations from "../hooks/useOperations";
@@ -15,7 +17,7 @@ export default function OperationsSection() {
     } = useOperations();
 
     return (
-        <section>
+        <section className="operations-section">
             <h2>Operations</h2>
 
             <OperationsEditor
