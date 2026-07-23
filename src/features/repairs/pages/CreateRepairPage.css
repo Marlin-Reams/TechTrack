@@ -24,3 +24,25 @@
 .repair-card p {
     color: #666;
 }
+
+.repair-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+}
+
+.save-repair-button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    background: #1976d2;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+}
+
+.save-repair-button:hover {
+    background: #1565c0;
+}
