@@ -1,12 +1,18 @@
 import "./AttachmentsSection.css";
 
-import useAttachments from "../hooks/useAttachments";
+import type { Dispatch, SetStateAction } from "react";
 
-export default function AttachmentsSection() {
-    const {
-        attachments,
-    } = useAttachments();
+import type { RepairAttachment } from "../types/RepairAttachment";
+import type { RepairRecord } from "../../repair-entry/types/RepairRecord";
 
+type AttachmentsSectionProps = {
+    attachments: RepairAttachment[];
+    setRepairRecord: Dispatch<SetStateAction<RepairRecord>>;
+};
+
+export default function AttachmentsSection({
+    attachments,
+}: AttachmentsSectionProps) {
     return (
         <section className="attachments-section">
             <div className="attachments-header">

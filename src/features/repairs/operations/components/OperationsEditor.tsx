@@ -1,4 +1,5 @@
 import type { Operation } from "../types/Operation";
+
 import OperationEntry from "./OperationEntry";
 
 type OperationsEditorProps = {

@@ -26,14 +26,20 @@ export default function CreateRepairPage() {
                 setRepairRecord={setRepairRecord}
             />
 
-            <OperationsSection />
+            <OperationsSection
+                operations={repairRecord.operations}
+                setRepairRecord={setRepairRecord}
+            />
 
             <NotesSection
                 note={repairRecord.notes}
                 setRepairRecord={setRepairRecord}
             />
 
-            <AttachmentsSection />
+            <AttachmentsSection
+                attachments={repairRecord.attachments}
+                setRepairRecord={setRepairRecord}
+            />
 
             <div className="repair-actions">
                 <button
