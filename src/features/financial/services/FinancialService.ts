@@ -1,22 +1,24 @@
-import { getProductivitySummary } from "../../dashboard/services/productivityService";
+import { getProductivitySummary }
+    from "../../dashboard/services/productivityService";
 
-import payrollProfileService from "./PayrollProfileService";
+import payrollProfileService
+    from "./PayrollProfileService";
 
-import type { FinancialSummary } from "../types/FinancialSummary";
+import type { FinancialSummary }
+    from "../types/FinancialSummary";
 
 class FinancialService {
 
     async getWeeklySummary(): Promise<FinancialSummary> {
 
-        const productivity = await getProductivitySummary();
+        const productivity =
+            await getProductivitySummary();
 
         const payrollProfile =
             await payrollProfileService.getPayrollProfile();
 
-        const flagHours = productivity.weeklyHours;
-
-        // Clock hours will be added in a future milestone
-        const clockHours = 0;
+        const flagHours =
+            productivity.weeklyHours;
 
         const grossEarnings =
             flagHours * payrollProfile.flatRatePay;
@@ -25,17 +27,31 @@ class FinancialService {
             payrollProfile.weeklyGoalHours;
 
         const remainingGoalHours =
-            Math.max(goalHours - flagHours, 0);
+            Math.max(
+                goalHours - flagHours,
+                0,
+            );
 
-        const guaranteeHours = 0;
+        //
+        // Financial v1
+        //
+        // Firestone guarantee currently treated as
+        // a fixed weekly base of $1,140.
+        // This can become configurable later.
+        //
 
-        const guaranteeEarnings = 0;
+        const guaranteeHours = 30;
+
+        const guaranteeEarnings = 1140;
 
         const actualEarnings =
-            Math.max(grossEarnings, guaranteeEarnings);
+            Math.max(
+                grossEarnings,
+                guaranteeEarnings,
+            );
 
         const differenceFromGuarantee =
-            actualEarnings - guaranteeEarnings;
+            grossEarnings - guaranteeEarnings;
 
         const goalEarnings =
             goalHours * payrollProfile.flatRatePay;
@@ -49,7 +65,11 @@ class FinancialService {
         const projectedAnnualIncome =
             projectedWeeklyIncome * 52;
 
-        // Placeholder values until Payroll Profile is fully implemented
+        //
+        // These will come from Paystub Import
+        // in Financial v2.
+        //
+
         const estimatedTaxes = 0;
 
         const estimatedInsurance = 0;
@@ -64,36 +84,33 @@ class FinancialService {
 
         return {
 
-            // Productivity
             weekFlagHours: flagHours,
-            weekClockHours: clockHours,
+            weekClockHours: 40,
 
-            // Goal Tracking
             goalHours,
             remainingGoalHours,
             guaranteeHours,
 
-            // Earnings
             grossEarnings,
             guaranteeEarnings,
             actualEarnings,
             differenceFromGuarantee,
 
-            // Goals & Projections
             goalEarnings,
             projectedWeeklyIncome,
             projectedMonthlyIncome,
             projectedAnnualIncome,
 
-            // Deductions
             estimatedTaxes,
             estimatedInsurance,
             estimatedRetirement,
 
-            // Net
             estimatedTakeHome,
+
         };
+
     }
+
 }
 
 export default new FinancialService();

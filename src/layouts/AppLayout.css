@@ -1,0 +1,52 @@
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+
+    background: #f5f7fb;
+}
+
+.app-layout>header {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 2rem;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #dbe3ec;
+
+    flex-shrink: 0;
+}
+
+.app-layout>header h1 {
+    margin: 0;
+
+    font-size: 2rem;
+}
+
+.app-layout>header button {
+    padding: 0.5rem 1rem;
+
+    cursor: pointer;
+}
+
+.app-body {
+    flex: 1;
+
+    display: flex;
+
+    overflow: hidden;
+}
+
+.app-body main {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 2rem;
+}

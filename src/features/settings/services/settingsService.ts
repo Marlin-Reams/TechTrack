@@ -14,6 +14,7 @@ const defaultSettings: UserSettings = {
 };
 
 function getCurrentUserId(): string {
+
     const user = auth.currentUser;
 
     if (!user) {
@@ -24,6 +25,7 @@ function getCurrentUserId(): string {
 }
 
 function getSettingsDocument() {
+
     return doc(
         db,
         "users",
@@ -34,10 +36,12 @@ function getSettingsDocument() {
 }
 
 export async function getUserSettings(): Promise<UserSettings> {
+
     const settingsSnapshot =
         await getDoc(getSettingsDocument());
 
     if (!settingsSnapshot.exists()) {
+
         await setDoc(
             getSettingsDocument(),
             defaultSettings
@@ -52,6 +56,7 @@ export async function getUserSettings(): Promise<UserSettings> {
 export async function updateUserSettings(
     settings: UserSettings
 ): Promise<void> {
+
     await setDoc(
         getSettingsDocument(),
         settings

@@ -1,30 +1,86 @@
-import type { PayrollProfile } from "../types/PayrollProfile";
+import type { FinancialSummary } from "../types/FinancialSummary";
 
 interface Props {
+    summary: FinancialSummary;
+}
 
-    profile: PayrollProfile;
+function formatCurrency(
+    value: number,
+) {
+
+    return value.toLocaleString(
+        "en-US",
+        {
+            style: "currency",
+            currency: "USD",
+        },
+    );
 
 }
 
 export default function PayrollDeductionsCard({
-    profile,
+    summary,
 }: Props) {
+
+    const totalDeductions =
+        summary.estimatedTaxes
+        + summary.estimatedInsurance
+        + summary.estimatedRetirement;
 
     return (
 
-        <section className="financial-card">
+        <section className="payroll-deductions-card">
 
             <h2>Deductions</h2>
 
-            <p>Medical: ${profile.medicalDeduction.toFixed(2)}</p>
+            <div className="summary-grid">
 
-            <p>Dental: ${profile.dentalDeduction.toFixed(2)}</p>
+                <div>
+                    <span>Estimated Taxes</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.estimatedTaxes,
+                        )}
+                    </strong>
+                </div>
 
-            <p>Vision: ${profile.visionDeduction.toFixed(2)}</p>
+                <div>
+                    <span>Insurance</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.estimatedInsurance,
+                        )}
+                    </strong>
+                </div>
 
-            <p>Retirement: ${profile.retirementDeduction.toFixed(2)}</p>
+                <div>
+                    <span>Retirement</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.estimatedRetirement,
+                        )}
+                    </strong>
+                </div>
 
-            <p>Loan Repayment: ${profile.loanRepayment.toFixed(2)}</p>
+                <div>
+                    <span>Total Deductions</span>
+                    <strong>
+                        {formatCurrency(
+                            totalDeductions,
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Estimated Take Home</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.estimatedTakeHome,
+                        )}
+                    </strong>
+                </div>
+
+            </div>
 
         </section>
 

@@ -1,36 +1,79 @@
-import type { PayrollProfile } from "../types/PayrollProfile";
+import type { FinancialSummary } from "../types/FinancialSummary";
 
 interface Props {
+    summary: FinancialSummary;
+}
 
-    profile: PayrollProfile;
+function formatCurrency(
+    value: number,
+) {
+
+    return value.toLocaleString(
+        "en-US",
+        {
+            style: "currency",
+            currency: "USD",
+        },
+    );
 
 }
 
 export default function PayrollVerificationCard({
-    profile,
+    summary,
 }: Props) {
 
     return (
 
-        <section className="financial-card">
+        <section className="payroll-verification-card">
 
-            <h2>Verification</h2>
+            <h2>Payroll Verification</h2>
 
-            <p>
+            <div className="summary-grid">
 
-                <strong>Last Verified:</strong>{" "}
+                <div>
+                    <span>Calculated Gross</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.grossEarnings,
+                        )}
+                    </strong>
+                </div>
 
-                {profile.lastVerified || "Never"}
+                <div>
+                    <span>Actual Earnings Used</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.actualEarnings,
+                        )}
+                    </strong>
+                </div>
 
-            </p>
+                <div>
+                    <span>Guarantee Earnings</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.guaranteeEarnings,
+                        )}
+                    </strong>
+                </div>
 
-            <p>
+                <div>
+                    <span>Difference</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.differenceFromGuarantee,
+                        )}
+                    </strong>
+                </div>
 
-                <strong>Confidence:</strong>{" "}
+                <div>
+                    <span>Status</span>
+                    <strong>
+                        Pending Paystub Verification
+                    </strong>
+                </div>
 
-                Coming Soon
-
-            </p>
+            </div>
 
         </section>
 

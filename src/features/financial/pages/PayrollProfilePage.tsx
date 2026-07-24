@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 
-import payrollProfileService from "../services/PayrollProfileService";
+import payrollProfileService
+    from "../services/PayrollProfileService";
 
-import PayrollCompensationCard from "../components/PayrollCompensationCard";
-import PayrollDeductionsCard from "../components/PayrollDeductionsCard";
-import PayrollVerificationCard from "../components/PayrollVerificationCard";
+import PayrollProfileForm
+    from "../profile/components/PayrollProfileForm";
 
-import type { PayrollProfile } from "../types/PayrollProfile";
+import type { PayrollProfile }
+    from "../types/PayrollProfile";
 
 export default function PayrollProfilePage() {
 
     const [profile, setProfile] =
         useState<PayrollProfile | null>(null);
+
+    const [saving, setSaving] =
+        useState(false);
 
     useEffect(() => {
 
@@ -28,6 +32,52 @@ export default function PayrollProfilePage() {
 
     }, []);
 
+    function updateProfile(
+        updates: Partial<PayrollProfile>,
+    ) {
+
+        if (!profile) {
+
+            return;
+
+        }
+
+        setProfile({
+
+            ...profile,
+
+            ...updates,
+
+        });
+
+    }
+
+    async function saveProfile() {
+
+        if (!profile) {
+
+            return;
+
+        }
+
+        setSaving(true);
+
+        try {
+
+            await payrollProfileService.savePayrollProfile(
+                profile,
+            );
+
+            alert("Payroll Profile Saved");
+
+        } finally {
+
+            setSaving(false);
+
+        }
+
+    }
+
     if (!profile) {
 
         return <p>Loading Payroll Profile...</p>;
@@ -40,17 +90,22 @@ export default function PayrollProfilePage() {
 
             <h1>Payroll Profile</h1>
 
-            <PayrollCompensationCard
+            <PayrollProfileForm
                 profile={profile}
+                onChange={updateProfile}
             />
 
-            <PayrollDeductionsCard
-                profile={profile}
-            />
+            <button
+                type="button"
+                onClick={saveProfile}
+                disabled={saving}
+            >
 
-            <PayrollVerificationCard
-                profile={profile}
-            />
+                {saving
+                    ? "Saving..."
+                    : "Save Payroll Profile"}
+
+            </button>
 
         </main>
 

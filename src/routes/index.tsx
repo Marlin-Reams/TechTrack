@@ -14,6 +14,8 @@ import SettingsPage from "../features/settings/pages/SettingsPage";
 
 import FinancialPage from "../features/financial/pages/FinancialPage";
 
+import PaystubPage from "../features/financial/paystubs/pages/PaystubPage";
+
 import CreateRepairPage from "../features/repairs/pages/CreateRepairPage";
 import RepairHistoryPage from "../features/repairs/repair-history/pages/RepairHistoryPage";
 import WorkInProgressPage from "../features/repairs/work-in-progress/pages/WorkInProgressPage";
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
                     {
                         path: "/financial",
                         element: <FinancialPage />,
+                    },
+                    {
+                        path: "/financial/paystubs",
+                        element: <PaystubPage />,
                     },
                     {
                         path: "/settings",

@@ -67,8 +67,8 @@ export async function getProductivitySummary(): Promise<ProductivitySummary> {
         completedRepairs: repairs.length,
 
         averageHoursPerRepair:
-            repairs.length === 0
+            weeklyRepairs.length === 0
                 ? 0
-                : weeklyHours / repairs.length,
+                : weeklyHours / weeklyRepairs.length,
     };
 }

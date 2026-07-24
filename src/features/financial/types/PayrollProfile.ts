@@ -1,27 +1,25 @@
 export interface PayrollProfile {
 
+    // Compensation
+
     flatRatePay: number;
 
     weeklyGoalHours: number;
 
-    medicalDeduction: number;
+    guaranteePercentage: number;
 
-    dentalDeduction: number;
+    // Estimated Deductions
 
-    visionDeduction: number;
+    federalTaxRate: number;
 
-    retirementDeduction: number;
+    stateTaxRate: number;
 
-    loanRepayment: number;
+    socialSecurityRate: number;
 
-    federalWithholdingPercent: number;
+    medicareRate: number;
 
-    stateWithholdingPercent: number;
+    insurancePerWeek: number;
 
-    socialSecurityPercent: number;
-
-    medicarePercent: number;
-
-    lastVerified: string;
+    retirementPerWeek: number;
 
 }
