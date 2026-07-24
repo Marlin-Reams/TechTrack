@@ -47,7 +47,7 @@ function Sidebar() {
                 </li>
 
                 <li>
-                    <NavLink to="/financials">
+                    <NavLink to="/financial">
                         Financials
                     </NavLink>
                 </li>
