@@ -1,0 +1,12 @@
+.repairsGrid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(280px, 320px)
+    );
+
+    gap: 20px;
+
+    align-items: start;
+}

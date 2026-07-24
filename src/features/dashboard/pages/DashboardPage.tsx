@@ -1,24 +1,36 @@
-import WeeklyPerformanceCard from "../cards/WeeklyPerformanceCard";
-import WorkloadCard from "../cards/WorkloadCars";
+import WeeklyPerformanceCard from "../components/WeeklyPerformanceCard";
+import WorkloadCard from "../components/WorkloadCard";
+import RecentRepairs from "../components/RecentRepairs";
+import useDashboard from "../hooks/useDashboard";
 
-function DashboardPage() {
-  return (
-    <>
-      <h1>Dashboard</h1>
+export default function DashboardPage() {
+    const summary = useDashboard();
 
-      <div className="dashboard-grid">
-        <WeeklyPerformanceCard
-          flagHours={28.4}
-          goal={50}
-        />
+    if (!summary) {
+        return <p>Loading dashboard...</p>;
+    }
 
-         <WorkloadCard
-    repairOrders={14}
-    flagHours={28.4}
-  />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <h1>Dashboard</h1>
+
+            <div className="dashboard-grid">
+                <WeeklyPerformanceCard
+                    flagHours={summary.weeklyHours}
+                    goal={summary.weeklyGoal}
+                    repairOrders={summary.repairOrders}
+                    averageHoursPerRepair={summary.averageHoursPerRepair}
+                />
+
+                <WorkloadCard
+                    repairOrders={summary.openRepairs}
+                    flagHours={summary.weeklyHours}
+                />
+            </div>
+
+            <RecentRepairs
+                repairs={summary.recentRepairs}
+            />
+        </>
+    );
 }
-
-export default DashboardPage;

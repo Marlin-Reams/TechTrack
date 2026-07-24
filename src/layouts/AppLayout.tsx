@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { logout } from "../features/auth/services/authService";
-import Sidebar from "../components/common/Sidebar";
+import Sidebar from "../components/common/sidebar/Sidebar";
 
 async function handleLogout() {
   await logout();

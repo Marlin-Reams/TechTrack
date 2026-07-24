@@ -6,6 +6,8 @@ function getToday(): string {
 
 export function createRepairRecord(): RepairRecord {
     return {
+        status: "active",
+
         header: {
             repairOrderNumber: "",
             vin: "",
