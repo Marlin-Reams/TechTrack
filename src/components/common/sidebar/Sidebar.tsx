@@ -214,6 +214,20 @@ export default function Sidebar() {
 
                 <li>
 
+                    <NavLink to="/labor-library">
+
+                        <Settings size={20} />
+
+                        {!collapsed && (
+                            <span>Labor Library</span>
+                        )}
+
+                    </NavLink>
+
+                </li>
+
+                <li>
+
                     <NavLink to="/settings">
 
                         <Settings size={20} />

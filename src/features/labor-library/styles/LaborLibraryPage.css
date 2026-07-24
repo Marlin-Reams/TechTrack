@@ -1,0 +1,26 @@
+.labor-library-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.labor-library-title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.labor-card {
+    background: #ffffff;
+    border: 1px solid #d9dce3;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+}
+
+.labor-card-title {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}

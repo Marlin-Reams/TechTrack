@@ -19,6 +19,7 @@ import PaystubPage from "../features/financial/paystubs/pages/PaystubPage";
 import CreateRepairPage from "../features/repairs/pages/CreateRepairPage";
 import RepairHistoryPage from "../features/repairs/repair-history/pages/RepairHistoryPage";
 import WorkInProgressPage from "../features/repairs/work-in-progress/pages/WorkInProgressPage";
+import LaborLibraryPage from "../features/labor-library/pages/LaborLibraryPage";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
                     {
                         path: "/settings",
                         element: <SettingsPage />,
+                    },
+                    {
+                        path: "/labor-library",
+                        element: <LaborLibraryPage />
                     },
                 ],
             },

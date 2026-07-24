@@ -1,0 +1,62 @@
+.labor-article-form {
+    display: grid;
+    grid-template-columns: 160px 1fr 160px 120px auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+.labor-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.labor-form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.labor-form-group input,
+.labor-form-group select {
+    height: 40px;
+    padding: 0 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.labor-form-group input:focus,
+.labor-form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.labor-save-button {
+    height: 40px;
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.labor-save-button:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.labor-save-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.labor-override {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+}

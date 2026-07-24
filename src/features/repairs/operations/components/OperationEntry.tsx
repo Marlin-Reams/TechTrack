@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Operation } from "../types/Operation";
-import type { LaborArticle } from "../data/laborLibrary";
-import { findLaborArticle } from "../services/laborLibraryService";
+import { findLaborArticle } from "../../../labor-library/services/laborLibraryService";
+import type { LaborArticle } from "../../../labor-library/types/LaborArticle";
 import { createOperation } from "../services/operationFactory";
 import ArticleInput from "./ArticleInput";
 import "../styles/OperationEntry.css";
@@ -50,12 +50,12 @@ export default function OperationEntry({
         articleInputRef.current?.focus();
     }
 
-    function handleArticleEnter() {
+    async function handleArticleEnter() {
         if (editing) return;
 
         if (!articleNumber.trim()) return;
 
-        const article = findLaborArticle(articleNumber);
+         const article = await findLaborArticle(articleNumber);
 
         if (!article) {
             alert("Article not found.");
