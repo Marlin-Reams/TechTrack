@@ -11,6 +11,13 @@ export default function useRepairRecord() {
             repairOrderNumber: "",
             repairDate: getToday(),
             mileage: null,
+
+            vin: "",
+            licensePlate: "",
+            year: "",
+            make: "",
+            model: "",
+            engine: "",
         },
         operations: [],
     });

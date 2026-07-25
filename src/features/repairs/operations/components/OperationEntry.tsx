@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Operation } from "../types/Operation";
-import { findLaborArticle } from "../../../labor-library/services/laborLibraryService";
 import type { LaborArticle } from "../../../labor-library/types/LaborArticle";
 import { createOperation } from "../services/operationFactory";
-import ArticleInput from "./ArticleInput";
+import LaborArticleLookup from "./LaborArticleLookup";
 import "../styles/OperationEntry.css";
 import VariableOperationForm from "./VariableOperationForm";
 import EditOperationForm from "./EditOperationForm";
@@ -21,9 +20,9 @@ export default function OperationEntry({
     onUpdateOperation,
     onCancelEdit,
 }: OperationEntryProps) {
-    const articleInputRef = useRef<HTMLInputElement>(null);
+    
 
-    const [articleNumber, setArticleNumber] = useState("");
+    
     const [pendingArticle, setPendingArticle] =
         useState<LaborArticle | null>(null);
     const [workPerformed, setWorkPerformed] = useState("");
@@ -36,52 +35,46 @@ export default function OperationEntry({
             return;
         }
 
-        setArticleNumber(selectedOperation.articleNumber);
+        
         setWorkPerformed(selectedOperation.workPerformed);
         setHours(selectedOperation.hours.toString());
     }, [selectedOperation]);
 
     function resetForm() {
-        setArticleNumber("");
-        setPendingArticle(null);
-        setWorkPerformed("");
-        setHours("");
+    
+    setPendingArticle(null);
+    setWorkPerformed("");
+    setHours("");
+}
 
-        articleInputRef.current?.focus();
+    function handleArticleSelected(
+    article: LaborArticle
+) {
+
+    if (editing) {
+        return;
     }
 
-    async function handleArticleEnter() {
-        if (editing) return;
+    if (article.laborType === "fixed") {
 
-        if (!articleNumber.trim()) return;
+        onAddOperation(
+            createOperation({
+                articleNumber: article.articleNumber,
+                description: article.description,
+                workPerformed: article.description,
+                laborType: article.laborType,
+                hours: article.standardHours,
+            })
+        );
 
-         const article = await findLaborArticle(articleNumber);
-
-        if (!article) {
-            alert("Article not found.");
-            return;
-        }
-
-        if (article.laborType === "fixed") {
-            onAddOperation(
-                createOperation({
-                    articleNumber: article.articleNumber,
-                    description: article.description,
-                    workPerformed: article.description,
-                    laborType: article.laborType,
-                    hours: article.standardHours,
-                })
-            );
-
-            resetForm();
-            return;
-        }
-
-        setPendingArticle(article);
-        setArticleNumber("");
-        setWorkPerformed("");
-        setHours("");
+        resetForm();
+        return;
     }
+
+    setPendingArticle(article);
+    setWorkPerformed("");
+    setHours("");
+}
 
     function handleSaveVariable() {
         if (!pendingArticle) return;
@@ -132,12 +125,9 @@ export default function OperationEntry({
     return (
         <>
             <div className="operation-entry">
-                <ArticleInput
-                    value={articleNumber}
-                    onChange={setArticleNumber}
-                    onEnter={handleArticleEnter}
-                    inputRef={articleInputRef}
-                />
+                <LaborArticleLookup
+    onSelect={handleArticleSelected}
+/>
             </div>
 
             {editing && (

@@ -20,6 +20,8 @@ export default function LaborLibraryPage() {
     const [formMode, setFormMode] =
         useState<"create" | "edit">("create");
 
+    const [searchText, setSearchText] = useState("");
+
     useEffect(() => {
         loadArticles();
     }, []);
@@ -28,6 +30,21 @@ export default function LaborLibraryPage() {
         const laborArticles = await getAllLaborArticles();
         setArticles(laborArticles);
     }
+
+    const filteredArticles = articles.filter((article) => {
+
+        const search = searchText.trim().toLowerCase();
+
+        return (
+            article.articleNumber
+                .toLowerCase()
+                .includes(search) ||
+
+            article.description
+                .toLowerCase()
+                .includes(search)
+        );
+    });
 
     function handleEdit(
         article: LaborArticle
@@ -77,8 +94,18 @@ export default function LaborLibraryPage() {
                     Labor Articles
                 </h2>
 
+                <input
+                    className="labor-search"
+                    type="text"
+                    placeholder="Search by article number or description..."
+                    value={searchText}
+                    onChange={(event) =>
+                        setSearchText(event.target.value)
+                    }
+                />
+
                 <LaborArticleTable
-                    articles={articles}
+                    articles={filteredArticles}
                     onEdit={handleEdit}
                 />
 

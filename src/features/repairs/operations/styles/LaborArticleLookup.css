@@ -1,0 +1,90 @@
+.labor-lookup {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.labor-lookup label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.labor-lookup input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+
+    font-size: 1rem;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.labor-lookup input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+.labor-lookup-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+
+    max-height: 320px;
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+
+    z-index: 1000;
+}
+
+.labor-lookup-item {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+    text-align: left;
+}
+
+.labor-lookup-item:hover {
+    background: #eff6ff;
+}
+
+.labor-lookup-item strong {
+    color: #111827;
+}
+
+.labor-lookup-item div:nth-child(2) {
+    flex: 1;
+    color: #4b5563;
+}
+
+.labor-lookup-item div:last-child {
+    color: #2563eb;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.labor-lookup-item.active {
+    background-color: #dbeafe;
+}
