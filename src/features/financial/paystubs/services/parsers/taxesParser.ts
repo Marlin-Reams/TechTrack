@@ -1,45 +1,39 @@
 import type {
-    DeductionSection,
+    TaxSection,
 } from "../../types/FirestonePaystub";
 
 import {
     getAmountAfterLabel,
 } from "./parserHelpers";
 
-export function parseDeductions(
+export function parseTaxes(
     sectionText: string
-): DeductionSection {
+): TaxSection {
 
     return {
 
-        medical:
+        federal:
             getAmountAfterLabel(
                 sectionText,
-                "medical"
+                "federal income tax"
             ),
 
-        dental:
+        socialSecurity:
             getAmountAfterLabel(
                 sectionText,
-                "dental"
+                "social security"
             ),
 
-        vision:
+        medicare:
             getAmountAfterLabel(
                 sectionText,
-                "vision"
+                "medicare"
             ),
 
-        loanRepayment:
+        totalTaxes:
             getAmountAfterLabel(
                 sectionText,
-                "loan repayment"
-            ),
-
-        totalDeductions:
-            getAmountAfterLabel(
-                sectionText,
-                "total deductions"
+                "total taxes"
             ),
 
     };

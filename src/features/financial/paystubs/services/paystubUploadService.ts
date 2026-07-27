@@ -22,7 +22,7 @@ import FirestonePaystubParser from "./FirestonePaystubParser";
 export async function uploadPaystub(
     file: File
 ): Promise<void> {
-
+    
     const user = auth.currentUser;
 
     if (!user) {
@@ -98,11 +98,11 @@ export async function uploadPaystub(
 
         }
 
+        
         const result =
             await FirestonePaystubParser.parse(
                 documentText
             );
-
         if (
             !result.success ||
             !result.extraction

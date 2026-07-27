@@ -23,7 +23,7 @@ export default function DashboardPage() {
                 />
 
                 <WorkloadCard
-                    repairOrders={summary.openRepairs}
+                    repairOrders={summary.repairOrders}
                     flagHours={summary.weeklyHours}
                 />
             </div>

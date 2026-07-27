@@ -33,24 +33,32 @@ function calculateHours(
     }, 0);
 }
 
+function parseLocalDate(dateString: string): Date {
+    const [year, month, day] = dateString
+        .split("-")
+        .map(Number);
+
+    return new Date(year, month - 1, day);
+}
+
 export async function getProductivitySummary(): Promise<ProductivitySummary> {
 
     const repairs = await getCompletedRepairs();
 
     const todayRepairs = repairs.filter(repair =>
-        isToday(new Date(repair.header.repairDate))
+        isToday(parseLocalDate(repair.header.repairDate))
     );
 
     const weeklyRepairs = repairs.filter(repair =>
-        isThisWeek(new Date(repair.header.repairDate))
+        isThisWeek(parseLocalDate(repair.header.repairDate))
     );
 
     const monthlyRepairs = repairs.filter(repair =>
-        isThisMonth(new Date(repair.header.repairDate))
+        isThisMonth(parseLocalDate(repair.header.repairDate))
     );
 
     const yearlyRepairs = repairs.filter(repair =>
-        isThisYear(new Date(repair.header.repairDate))
+        isThisYear(parseLocalDate(repair.header.repairDate))
     );
 
     const todayHours = calculateHours(todayRepairs);
@@ -64,7 +72,7 @@ export async function getProductivitySummary(): Promise<ProductivitySummary> {
         monthlyHours,
         yearlyHours,
 
-        completedRepairs: repairs.length,
+        completedRepairs: weeklyRepairs.length,
 
         averageHoursPerRepair:
             weeklyRepairs.length === 0

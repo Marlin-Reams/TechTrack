@@ -3,36 +3,27 @@ import type {
 } from "../../types/FirestonePaystub";
 
 import {
-    getAmount,
-    parsePayrollTable,
-} from "./tableParser";
+    getAmountAfterLabel,
+} from "./parserHelpers";
 
 export function parseEarnings(
     sectionText: string
 ): EarningsSection {
 
-    const table =
-        parsePayrollTable(sectionText);
-
     return {
 
         grossPay:
-            getAmount(
-                table,
-                "Total Earnings"
+            getAmountAfterLabel(
+                sectionText,
+                "total earnings"
             ),
 
         /*
-            Firestone paystubs do not currently
-            expose these in the table format.
-
-            We'll populate them in a later parser
-            revision when we parse the earnings
-            detail rows.
+            These will be implemented
+            in the next revision.
         */
 
         flagHours: undefined,
-
         flagRate: undefined,
 
     };

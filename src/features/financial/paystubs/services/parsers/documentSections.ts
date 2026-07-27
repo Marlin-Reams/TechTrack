@@ -20,41 +20,12 @@ export function splitFirestoneSections(
 
     return {
 
-        payPeriod: getSection(
-            documentText,
-            "PAY PERIOD",
-            "EARNINGS"
-        ),
-
-        earnings: getSection(
-            documentText,
-            "EARNINGS",
-            "DEDUCTIONS"
-        ),
-
-        deductions: getSection(
-            documentText,
-            "DEDUCTIONS",
-            "TAXES"
-        ),
-
-        taxes: getSection(
-            documentText,
-            "TAXES",
-            "TAX BASES"
-        ),
-
-        taxBases: getSection(
-            documentText,
-            "TAX BASES",
-            "NET PAY"
-        ),
-
-        netPay: getSection(
-            documentText,
-            "NET PAY",
-            ""
-        ),
+      payPeriod: getSection(documentText, "pay period", "earnings"),
+earnings: getSection(documentText, "earnings", "deductions"),
+deductions: getSection(documentText, "deductions", "taxes"),
+taxes: getSection(documentText, "taxes", "tax bases"),
+taxBases: getSection(documentText, "tax bases", "net pay"),
+netPay: getSection(documentText, "net pay", ""),
 
     };
 

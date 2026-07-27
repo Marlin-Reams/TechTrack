@@ -12,13 +12,10 @@ import { splitFirestoneSections } from "./parsers/documentSections";
 
 import { parsePayPeriod } from "./parsers/payPeriodParser";
 import { parseDeductions } from "./parsers/deductionsParser";
-
+import { parseNetPay } from "./parsers/netPayParser";
 import { parseEarnings } from "./parsers/earningsParser";
-const parseTaxes = (_section: string) => ({});
+import { parseTaxes } from "./parsers/taxesParser"; const parseTaxBases = (_section: string) => ({});
 
-const parseTaxBases = (_section: string) => ({});
-
-const parseNetPay = (_section: string) => ({});
 
 class FirestonePaystubParser implements PaystubParser {
 
@@ -27,7 +24,6 @@ class FirestonePaystubParser implements PaystubParser {
     ): boolean {
 
         const normalized = normalize(documentText);
-
         return (
             normalized.includes("bridgestone") ||
             normalized.includes("firestone")
@@ -124,11 +120,17 @@ class FirestonePaystubParser implements PaystubParser {
 
             };
 
+            const cleanedExtraction = Object.fromEntries(
+                Object.entries(extraction).filter(
+                    ([, value]) => value !== undefined
+                )
+            ) as PayrollExtraction;
+
             return {
 
                 success: true,
 
-                extraction,
+                extraction: cleanedExtraction,
 
                 confidence: 0.98,
 
@@ -137,7 +139,7 @@ class FirestonePaystubParser implements PaystubParser {
             };
 
         } catch (error) {
-
+            console.error("Parser error:", error);
             return {
 
                 success: false,
@@ -166,7 +168,8 @@ function normalize(
     return text
         .replace(/\r/g, "")
         .replace(/\t/g, " ")
-        .replace(/ +/g, " ");
+        .replace(/ +/g, " ")
+        .toLowerCase();
 
 }
 

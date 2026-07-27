@@ -1,8 +1,8 @@
 import { getProductivitySummary }
     from "../../dashboard/services/productivityService";
 
-import payrollProfileService
-    from "./PayrollProfileService";
+import { getUserSettings }
+    from "../../settings/services/settingsService";
 
 import type { FinancialSummary }
     from "../types/FinancialSummary";
@@ -14,17 +14,17 @@ class FinancialService {
         const productivity =
             await getProductivitySummary();
 
-        const payrollProfile =
-            await payrollProfileService.getPayrollProfile();
+        const settings =
+            await getUserSettings();
 
         const flagHours =
             productivity.weeklyHours;
 
         const grossEarnings =
-            flagHours * payrollProfile.flatRatePay;
+            flagHours * settings.flatRatePay;
 
         const goalHours =
-            payrollProfile.weeklyGoalHours;
+            settings.weeklyFlagHourGoal;
 
         const remainingGoalHours =
             Math.max(
@@ -54,7 +54,7 @@ class FinancialService {
             grossEarnings - guaranteeEarnings;
 
         const goalEarnings =
-            goalHours * payrollProfile.flatRatePay;
+            goalHours * settings.flatRatePay;
 
         const projectedWeeklyIncome =
             actualEarnings;

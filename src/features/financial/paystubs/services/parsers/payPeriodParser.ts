@@ -1,68 +1,46 @@
-import type { PayPeriod } from "../../types/FirestonePaystub";
+import type {
+    PayPeriod,
+} from "../../types/FirestonePaystub";
+
+import {
+    getDateAfterLabel,
+    getDateBeforeLabel,
+    getTextAfterLabel,
+} from "./parserHelpers";
 
 export function parsePayPeriod(
     documentText: string
 ): PayPeriod {
 
+    console.log("Using NEW payPeriodParser");
+    console.log(documentText);
+
     return {
 
         periodNumber:
-            extractValue(
+            getTextAfterLabel(
                 documentText,
-                "PAY PERIOD"
+                "pay period"
             ),
 
         periodStart:
-            extractValue(
+            getDateAfterLabel(
                 documentText,
-                "PERIOD START"
+                "period start"
             ),
 
         periodEnd:
-            extractValue(
+            getDateAfterLabel(
                 documentText,
-                "PERIOD END"
+                "period end"
             ),
 
         payDate:
-            extractValue(
+            getDateBeforeLabel(
                 documentText,
-                "PAY DATE"
+                "pay date"
             ),
 
     };
-
-}
-
-function extractValue(
-    text: string,
-    label: string
-): string | undefined {
-
-    const expression =
-        new RegExp(
-            `${escapeRegex(label)}\\s+([^\\n]+)`,
-            "i"
-        );
-
-    const match =
-        text.match(expression);
-
-    if (!match) {
-        return undefined;
-    }
-
-    return match[1].trim();
-
-}
-
-function escapeRegex(
-    value: string
-): string {
-
-    return value.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
-    );
 
 }
