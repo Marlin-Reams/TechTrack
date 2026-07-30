@@ -27,5 +27,9 @@ export function createRepairRecord(): RepairRecord {
         },
 
         attachments: [],
+
+        payrollVerification: {
+            status: "pending",
+        },
     };
 }
