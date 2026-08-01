@@ -20,7 +20,7 @@ export default function WorkloadCard({
     pendingCount,
     verifiedCount,
     issueCount,
-    resolvedCount,
+    
 }: WorkloadCardProps) {
 
     const navigate = useNavigate();
