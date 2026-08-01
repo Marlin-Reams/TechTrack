@@ -1,20 +1,174 @@
 .workload-card {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .metric {
-  text-align: center;
+    text-align: center;
 }
 
 .metric h1 {
-  margin: 0;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin: 0;
+
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hours-divider {
+    font-size: .65em;
+    color: #999;
+    font-weight: 400;
+    margin: 0 .3rem;
 }
 
 .metric p {
-  margin-top: .5rem;
-  color: #666;
+    margin: .35rem 0;
+    padding-top: .5rem;
+    font-size: 1.25rem;
+    color: #666;
+}
+
+.summary {
+    margin-top: .4rem;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+/* ---------- Status Grid ---------- */
+
+.status-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: .6rem;
+
+    margin-top: .4rem;
+
+}
+
+.status-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: .6rem;
+
+    border: 1px solid #ddd;
+
+    border-radius: .65rem;
+
+    background: #fafafa;
+
+    cursor: pointer;
+
+    transition: .15s ease;
+
+}
+
+.status-card:hover {
+
+    background: #f4f6fb;
+
+    border-color: #4b70e2;
+
+    transform: translateY(-2px);
+
+}
+
+.status-card .dot {
+
+    font-size: 1.15rem;
+
+    margin-bottom: .2rem;
+
+}
+
+.status-card .count {
+
+    font-size: 1.8rem;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+}
+
+.status-card .label {
+
+    margin-top: .2rem;
+
+    font-size: .9rem;
+
+    color: #666;
+
+}
+
+/* ---------- Bottom Details ---------- */
+
+.payroll-details {
+
+    width: 70%;
+
+    max-width: 340px;
+
+    margin-top: .3rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: .45rem;
+
+}
+
+.detail-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 1.35rem;
+
+    padding-top: 1rem
+
+}
+
+.detail-row strong {
+
+    font-weight: 700;
+
+}
+
+.queue-link {
+
+    margin-top: .5rem;
+
+    color: #2962ff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+.queue-link:hover {
+
+    text-decoration: underline;
+
 }

@@ -1,0 +1,46 @@
+.repair-summary-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.repair-summary-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.repair-summary-subtitle {
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 1rem;
+}
+
+.repair-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.repair-summary-table thead {
+    background: #f5f6f8;
+}
+
+.repair-summary-table th {
+    text-align: left;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.repair-summary-table td {
+    padding: 1rem;
+    border-top: 1px solid #ececec;
+}
+
+.repair-summary-table tfoot td {
+    border-top: 3px solid #444;
+    font-weight: bold;
+    padding-top: 1rem;
+}

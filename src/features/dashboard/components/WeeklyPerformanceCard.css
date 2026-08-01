@@ -6,14 +6,32 @@
 }
 
 .weekly-performance h1 {
-    font-size: 3.5rem;
     margin: 0;
+
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1;
 }
 
 .weekly-performance p {
-    margin: 0;
+    margin: .35rem 0;
+
+    font-size: 1.35rem;
+    color: #666;
+}
+
+.weekly-performance small {
+    font-size: 1.05rem;
+    color: #555;
 }
 
 .weekly-performance progress {
     width: 100%;
+    height: 10px;
+
+    margin: .5rem 0;
+}
+
+.weekly-performance strong {
+    font-weight: 700;
 }

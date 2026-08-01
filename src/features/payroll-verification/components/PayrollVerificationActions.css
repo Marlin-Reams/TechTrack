@@ -1,0 +1,8 @@
+.payroll-verification-actions-section {
+    margin-top: 1.5rem;
+}
+
+.payroll-verification-actions {
+    display: flex;
+    gap: 1rem;
+}

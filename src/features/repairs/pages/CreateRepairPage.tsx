@@ -7,6 +7,8 @@ import RepairHeader from "../repair-header/components/RepairHeader";
 import OperationsSection from "../operations/components/OperationsSection";
 import NotesSection from "../notes/components/NotesSection";
 import AttachmentsSection from "../attachments/components/AttachmentsSection";
+import PayrollVerificationHistory
+    from "../../payroll-verification/components/PayrollVerificationHistory";
 
 import {
     createRepair,
@@ -44,60 +46,65 @@ export default function CreateRepairPage() {
     const [lastSaved, setLastSaved] =
         useState<Date | null>(null);
 
-        const [isLoading, setIsLoading] =
-    useState(isEditing);
+    const [isLoading, setIsLoading] =
+        useState(isEditing);
 
     const saveTimer = useRef<number | null>(null);
 
     useEffect(() => {
 
-    if (!repairId) {
+        if (!repairId) {
 
-        setRepairRecord(createRepairRecord());
-        setOriginalRepair(null);
-        setIsDirty(false);
-        setSaveStatus("idle");
-        setLastSaved(null);
-        setIsLoading(false);
-
-        return;
-    }
-
-    const id = repairId;
-
-    async function loadRepair() {
-
-        try {
-
-            setIsLoading(true);
-
-            const repair = await getRepair(id);
-
-            const normalizedRepair: RepairRecord = {
-                ...repair,
-                status: repair.status ?? "active",
-            };
-
-            setRepairRecord(normalizedRepair);
-            setOriginalRepair(normalizedRepair);
+            setRepairRecord(createRepairRecord());
+            setOriginalRepair(null);
             setIsDirty(false);
-        }
-        catch (error) {
-
-            console.error(error);
-
-        }
-        finally {
-
+            setSaveStatus("idle");
+            setLastSaved(null);
             setIsLoading(false);
 
+            return;
         }
 
-    }
+        const id = repairId;
 
-    loadRepair();
+        async function loadRepair() {
 
-}, [repairId]);
+            try {
+
+                setIsLoading(true);
+
+                const repair = await getRepair(id);
+
+                const normalizedRepair: RepairRecord = {
+                    ...repair,
+
+                    status: repair.status ?? "active",
+
+                    payrollVerification: repair.payrollVerification ?? {
+                        status: "pending",
+                    },
+                };
+
+                setRepairRecord(normalizedRepair);
+                setOriginalRepair(normalizedRepair);
+                setIsDirty(false);
+            }
+            catch (error) {
+
+                console.error(error);
+
+            }
+            finally {
+
+                setIsLoading(false);
+
+            }
+
+        }
+
+        loadRepair();
+
+    }, [repairId]);
 
     useEffect(() => {
         if (!isEditing || !originalRepair) {
@@ -152,6 +159,8 @@ export default function CreateRepairPage() {
         }
     }
 
+
+
     let buttonText = isEditing
         ? "Update Repair"
         : "Save Repair";
@@ -173,12 +182,12 @@ export default function CreateRepairPage() {
     }
 
     if (isLoading) {
-    return (
-        <main className="create-repair-page">
-            <h2>Loading Repair...</h2>
-        </main>
-    );
-}
+        return (
+            <main className="create-repair-page">
+                <h2>Loading Repair...</h2>
+            </main>
+        );
+    }
 
     return (
         <main className="create-repair-page">
@@ -209,6 +218,16 @@ export default function CreateRepairPage() {
                 attachments={repairRecord.attachments}
                 setRepairRecord={setRepairRecord}
             />
+
+            {repairRecord.status === "completed" && (
+
+                <PayrollVerificationHistory
+                    repairRecord={repairRecord}
+                />
+
+            )}
+
+
 
             <div className="repair-actions">
                 <button

@@ -23,7 +23,33 @@ import type { StoredRepair } from "../types/StoredRepair";
 /* -------------------------------------------------------------------------- */
 /*                               Private Helpers                              */
 /* -------------------------------------------------------------------------- */
+import {
+    isThisWeek,
+} from "../../dashboard/services/dateUtils";
 
+function parseLocalDate(dateString: string): Date {
+
+    const [year, month, day] = dateString
+        .split("-")
+        .map(Number);
+
+    return new Date(year, month - 1, day);
+
+}
+
+export async function getCompletedRepairsForWeek(): Promise<StoredRepair[]> {
+
+    const repairs = await getCompletedRepairs();
+
+    return repairs.filter(repair =>
+        isThisWeek(
+            parseLocalDate(
+                repair.header.repairDate
+            )
+        )
+    );
+
+}
 
 
 function getRepairCollection() {

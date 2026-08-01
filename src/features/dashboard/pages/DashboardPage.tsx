@@ -1,6 +1,7 @@
 import WeeklyPerformanceCard from "../components/WeeklyPerformanceCard";
 import WorkloadCard from "../components/WorkloadCard";
-import RecentRepairs from "../components/RecentRepairs";
+import NeedsVerificationCard
+    from "../../payroll-verification/components/NeedsVerificationCard";
 import useDashboard from "../hooks/useDashboard";
 
 export default function DashboardPage() {
@@ -23,12 +24,16 @@ export default function DashboardPage() {
                 />
 
                 <WorkloadCard
-                    repairOrders={summary.repairOrders}
-                    flagHours={summary.weeklyHours}
-                />
+    expectedHours={summary.expectedHours}
+    verifiedHours={summary.verifiedHours}
+    pendingCount={summary.pendingCount}
+    verifiedCount={summary.verifiedCount}
+    issueCount={summary.issueCount}
+    resolvedCount={summary.resolvedCount}
+/>
             </div>
 
-            <RecentRepairs
+            <NeedsVerificationCard
                 repairs={summary.recentRepairs}
             />
         </>

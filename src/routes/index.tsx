@@ -21,6 +21,8 @@ import RepairHistoryPage from "../features/repairs/repair-history/pages/RepairHi
 import WorkInProgressPage from "../features/repairs/work-in-progress/pages/WorkInProgressPage";
 import LaborLibraryPage from "../features/labor-library/pages/LaborLibraryPage";
 import RepairListPage from "../features/repairs/repair-list/pages/RepairListPage";
+import PayrollVerificationPage
+    from "../features/payroll-verification/pages/PayrollVerificationPage";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
                     {
                         path: "/repairs/:repairId",
                         element: <CreateRepairPage />,
+                    },
+                    {
+                        path: "/payroll-verification/:repairId",
+                        element: <PayrollVerificationPage />,
                     },
                     {
                         path: "/repairs/history",

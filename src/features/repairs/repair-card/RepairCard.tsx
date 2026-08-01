@@ -12,9 +12,10 @@ interface RepairCardProps {
     repair: StoredRepair;
 }
 
-export default function RepairHistoryCard({
+export default function RepairCard({
     repair,
 }: RepairCardProps) {
+
     const navigate = useNavigate();
 
     const vehicle = [
@@ -25,43 +26,87 @@ export default function RepairHistoryCard({
         .filter(Boolean)
         .join(" ");
 
-    function openRepair() {
-        navigate(`/repairs/${repair.id}`);
-    }
+    const expectedHours =
+        repair.operations.reduce(
+            (total, operation) =>
+                total + operation.hours,
+            0
+        );
 
-    const status = repair.status ?? "active";
+    const payroll =
+    repair.payrollVerification ?? {
+        status: "pending",
+        paidHours: undefined,
+    };
+
+    const status =
+        repair.status ?? "active";
 
     const statusColor =
         repairStatusMetadata[status].color;
 
+    function openRepair() {
+
+        if (status === "completed") {
+
+            navigate(
+                `/payroll-verification/${repair.id}`
+            );
+
+            return;
+
+        }
+
+        navigate(`/repairs/${repair.id}`);
+
+    }
+
     return (
+
         <article
             className={styles.repairCard}
             style={{
-                borderTop: `6px solid ${statusColor}`,
+                borderTop:
+                    `6px solid ${statusColor}`,
             }}
             onClick={openRepair}
             onKeyDown={(event) => {
+
                 if (
                     event.key === "Enter" ||
                     event.key === " "
                 ) {
+
                     event.preventDefault();
+
                     openRepair();
+
                 }
+
             }}
             role="button"
             tabIndex={0}
-            aria-label={`Open repair ${repair.header.repairOrderNumber || repair.id}`}
+            aria-label={
+                `Open repair ${
+                    repair.header.repairOrderNumber ||
+                    repair.id
+                }`
+            }
         >
+
             <header className={styles.header}>
+
                 <div className={styles.roNumber}>
-                    RO #{repair.header.repairOrderNumber || "Unknown"}
+                    RO #
+                    {repair.header.repairOrderNumber ??
+                        "Unknown"}
                 </div>
 
                 <div className={styles.date}>
-                    {repair.header.repairDate || "No Date"}
+                    {repair.header.repairDate ??
+                        "No Date"}
                 </div>
+
             </header>
 
             <div className={styles.vehicle}>
@@ -69,11 +114,74 @@ export default function RepairHistoryCard({
             </div>
 
             <div className={styles.operations}>
+
                 {repair.operations.length}{" "}
+
                 {repair.operations.length === 1
                     ? "Operation"
                     : "Operations"}
+
             </div>
+
+            {status === "completed" && (
+
+                <>
+
+                    <hr />
+
+                    <div className={styles.payrollSection}>
+
+                        <strong>
+
+                            {payroll.status ===
+                                "pending" &&
+                                "🟡 Payroll Pending"}
+
+                            {payroll.status ===
+                                "verified" &&
+                                "🟢 Payroll Verified"}
+
+                            {payroll.status ===
+                                "issue" &&
+                                "🔴 Payroll Issue"}
+
+                            {payroll.status ===
+                                "resolved" &&
+                                "🔵 Payroll Resolved"}
+
+                        </strong>
+
+                        <div>
+
+                            Expected Hours:{" "}
+
+                            {expectedHours.toFixed(1)}
+
+                        </div>
+
+                        {payroll.paidHours !==
+                            undefined && (
+
+                                <div>
+
+                                    Paid Hours:{" "}
+
+                                    {payroll.paidHours.toFixed(
+                                        1
+                                    )}
+
+                                </div>
+
+                            )}
+
+                    </div>
+
+                </>
+
+            )}
+
         </article>
+
     );
+
 }

@@ -1,0 +1,16 @@
+.payroll-verification-page {
+    padding: 2rem;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 1rem;
+}
