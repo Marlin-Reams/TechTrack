@@ -2,8 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
+
+/* ===========================
+   Main Metric
+=========================== */
 
 .metric {
     text-align: center;
@@ -17,158 +21,108 @@
     line-height: 1;
 }
 
-.hours-divider {
-    font-size: .65em;
-    color: #999;
-    font-weight: 400;
-    margin: 0 .3rem;
-}
-
 .metric p {
-    margin: .35rem 0;
-    padding-top: .5rem;
-    font-size: 1.25rem;
+    margin: 1.35rem 0;
+
+    font-size: 1.35rem;
     color: #666;
 }
 
 .summary {
-    margin-top: .4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
 
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     color: #2e7d32;
 }
 
-/* ---------- Status Grid ---------- */
+/* ===========================
+   Status Cards
+=========================== */
 
 .status-grid {
-
     width: 100%;
 
-    display: grid;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: .6rem;
-
-    margin-top: .4rem;
-
+    margin-top: .5rem;
 }
 
 .status-card {
+    width: 120px;
+    height: 125px;
 
     display: flex;
-
     flex-direction: column;
-
-    align-items: center;
-
     justify-content: center;
-
-    padding: .6rem;
-
-    border: 1px solid #ddd;
-
-    border-radius: .65rem;
+    align-items: center;
 
     background: #fafafa;
 
-    cursor: pointer;
+    border: 1px solid #d9d9d9;
+    border-radius: .75rem;
 
-    transition: .15s ease;
-
+    transition: .2s ease;
 }
 
 .status-card:hover {
-
-    background: #f4f6fb;
-
-    border-color: #4b70e2;
-
     transform: translateY(-2px);
-
+    background: #f5f5f5;
+    cursor: pointer;
 }
 
 .status-card .dot {
-
-    font-size: 1.15rem;
-
-    margin-bottom: .2rem;
-
+    font-size: 1.55rem;
+    margin-bottom: .5rem;
 }
 
 .status-card .count {
-
-    font-size: 1.8rem;
-
-    line-height: 1;
-
+    font-size: 2.2rem;
     font-weight: 700;
-
+    line-height: 1;
 }
 
 .status-card .label {
-
-    margin-top: .2rem;
-
-    font-size: .9rem;
-
-    color: #666;
-
-}
-
-/* ---------- Bottom Details ---------- */
-
-.payroll-details {
-
-    width: 70%;
-
-    max-width: 340px;
-
-    margin-top: .3rem;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: .45rem;
-
-}
-
-.detail-row {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    font-size: 1.35rem;
-
-    padding-top: 1rem
-
-}
-
-.detail-row strong {
-
-    font-weight: 700;
-
-}
-
-.queue-link {
-
     margin-top: .5rem;
 
-    color: #2962ff;
-
-    text-decoration: none;
-
-    font-weight: 600;
-
+    font-size: 1.05rem;
+    color: #666;
 }
 
-.queue-link:hover {
+/* ===========================
+   Bottom Summary
+=========================== */
 
-    text-decoration: underline;
+.payroll-details {
+    width: 100%;
+    margin-top: .35rem;
+    padding-top: 1.25rem;
 
+    border-top: 1px solid #ececec;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-label {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #555;
+}
+
+.detail-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.positive {
+    color: #2e7d32;
+}
+
+.negative {
+    color: #c62828;
 }

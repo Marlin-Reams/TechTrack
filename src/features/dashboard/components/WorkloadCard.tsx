@@ -43,9 +43,9 @@ export default function WorkloadCard({
                     <h1>
                         {verifiedHours.toFixed(1)}
                         <span className="hours-divider">
-                            {" / "}
+                            
                         </span>
-                        {expectedHours.toFixed(1)}
+                        
                     </h1>
 
                     <p>Verified This Week</p>
@@ -135,61 +135,28 @@ export default function WorkloadCard({
                       
 
                     
-                    <button
-                        className="status-card"
-                        onClick={() =>
-                            navigate(
-                                "/repairs/history?payroll=resolved"
-                            )
-                        }
-                    >
-                        <span className="dot">🔵</span>
-
-                        <span className="count">
-                            {resolvedCount}
-                        </span>
-
-                        <span className="label">
-                            Resolved
-                        </span>
-                    </button>
+                    
 
                 </div>
 
                 <div className="payroll-details">
 
-                    <div className="detail-row">
+    <div className="detail-label">
+        Difference
+    </div>
 
-                        <span>Expected Hours</span>
+    <div
+        className={`detail-value ${
+            difference >= 0
+                ? "positive"
+                : "negative"
+        }`}
+    >
+        {difference >= 0 ? "+" : ""}
+        {difference.toFixed(1)}
+    </div>
 
-                        <strong>
-                            {expectedHours.toFixed(1)}
-                        </strong>
-
-                    </div>
-
-                    <div className="detail-row">
-
-                        <span>Verified Hours</span>
-
-                        <strong>
-                            {verifiedHours.toFixed(1)}
-                        </strong>
-
-                    </div>
-
-                    <div className="detail-row">
-
-                        <span>Difference</span>
-
-                        <strong>
-                            {difference >= 0 ? "+" : ""}
-                            {difference.toFixed(1)}
-                        </strong>
-
-                    </div>
-
-                </div>
+</div>
 
             </div>
 
