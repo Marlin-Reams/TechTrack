@@ -1,6 +1,6 @@
 .repairCard {
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
+    background: var(--app-surface, #ffffff);
+    border: 1px solid var(--app-border, #dcdcdc);
     border-top: 4px solid #2563eb;
     border-radius: 12px;
 
@@ -34,11 +34,11 @@
 .roNumber {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #222;
+    color: var(--app-text, #222);
 }
 
 .date {
-    color: #777;
+    color: var(--app-muted, #777);
     font-size: 0.85rem;
     white-space: nowrap;
 }
@@ -46,7 +46,7 @@
 .vehicle {
     font-size: 1rem;
     font-weight: 600;
-    color: #333;
+    color: var(--app-text, #333);
 
     margin-bottom: 14px;
 }
@@ -54,6 +54,6 @@
 .operations {
     margin-top: auto;
 
-    color: #555;
+    color: var(--app-muted, #555);
     font-size: 0.95rem;
 }

@@ -25,18 +25,24 @@ export default function PayrollDeductionsCard({
     const totalDeductions =
         summary.estimatedTaxes
         + summary.estimatedInsurance
-        + summary.estimatedRetirement;
+        + summary.estimatedRetirement
+        + summary.estimatedOtherDeductions;
 
     return (
 
         <section className="payroll-deductions-card">
 
-            <h2>Deductions</h2>
+            <div className="financial-card-heading">
+                <h2>Deductions</h2>
+                <span>
+                    Based on {summary.paystubsUsed} paystub{summary.paystubsUsed === 1 ? "" : "s"}
+                </span>
+            </div>
 
             <div className="summary-grid">
 
                 <div>
-                    <span>Estimated Taxes</span>
+                    <span>Estimated Taxes ({(summary.estimatedTaxRate * 100).toFixed(1)}%)</span>
                     <strong>
                         {formatCurrency(
                             summary.estimatedTaxes,
@@ -58,6 +64,15 @@ export default function PayrollDeductionsCard({
                     <strong>
                         {formatCurrency(
                             summary.estimatedRetirement,
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Other Deductions</span>
+                    <strong>
+                        {formatCurrency(
+                            summary.estimatedOtherDeductions,
                         )}
                     </strong>
                 </div>

@@ -19,6 +19,7 @@ import {
 import { extractPdfText } from "./pdfTextExtractor";
 import FirestonePaystubParser from "./FirestonePaystubParser";
 
+
 export async function uploadPaystub(
     file: File
 ): Promise<void> {
@@ -76,6 +77,13 @@ export async function uploadPaystub(
 
         });
 
+    await processPaystub(paystubId, file);
+}
+
+async function processPaystub(
+    paystubId: string,
+    file: File
+): Promise<void> {
     try {
 
         await updatePaystubStatus(
@@ -129,14 +137,19 @@ export async function uploadPaystub(
 
     } catch (error) {
 
+        const message =
+            error instanceof Error
+                ? error.message
+                : "Unknown processing error";
+
         await markPaystubFailed(
 
             paystubId,
 
-            error instanceof Error
-                ? error.message
-                : "Unknown processing error"
+            message
 
         );
+
+        throw new Error(message);
     }
 }

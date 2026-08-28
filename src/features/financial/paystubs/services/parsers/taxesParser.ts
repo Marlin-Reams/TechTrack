@@ -2,40 +2,19 @@ import type {
     TaxSection,
 } from "../../types/FirestonePaystub";
 
-import {
-    getAmountAfterLabel,
-} from "./parserHelpers";
+import { getCurrentAmountFromRow } from "./parserHelpers";
 
 export function parseTaxes(
     sectionText: string
 ): TaxSection {
 
-    return {
+    const socialSecurity = getCurrentAmountFromRow(sectionText, "social security tax");
+    const medicare = getCurrentAmountFromRow(sectionText, "medicare tax");
+    const totalTaxes = getCurrentAmountFromRow(sectionText, "total taxes");
+    const federal = totalTaxes !== undefined
+        ? Math.max(totalTaxes - (socialSecurity ?? 0) - (medicare ?? 0), 0)
+        : undefined;
 
-        federal:
-            getAmountAfterLabel(
-                sectionText,
-                "federal income tax"
-            ),
-
-        socialSecurity:
-            getAmountAfterLabel(
-                sectionText,
-                "social security"
-            ),
-
-        medicare:
-            getAmountAfterLabel(
-                sectionText,
-                "medicare"
-            ),
-
-        totalTaxes:
-            getAmountAfterLabel(
-                sectionText,
-                "total taxes"
-            ),
-
-    };
+    return { federal, socialSecurity, medicare, totalTaxes };
 
 }

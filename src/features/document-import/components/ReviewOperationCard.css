@@ -1,0 +1,144 @@
+.review-operation-card {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 1rem;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+    transition: .2s;
+
+    min-height: 140px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+.review-operation-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+
+}
+
+.operation-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+
+}
+
+.operation-top h3 {
+
+    margin: 0;
+
+    font-size: 1.05rem;
+
+    line-height: 1.35;
+
+}
+
+.operation-top p {
+
+    margin-top: .35rem;
+
+    color: #777;
+
+    font-size: .95rem;
+
+}
+
+.operation-hours {
+
+    text-align: center;
+
+    min-width: 60px;
+
+    font-size: 1.75rem;
+
+    font-weight: bold;
+
+    color: #4361ee;
+
+}
+
+.operation-hours span {
+
+    display: block;
+
+    font-size: .8rem;
+
+    color: #777;
+
+    font-weight: normal;
+
+}
+
+.review-operation-card ul {
+
+    margin-top: 1rem;
+
+    padding-left: 1rem;
+
+}
+
+.review-operation-card li {
+
+    margin-bottom: .35rem;
+
+    color: #555;
+
+}
+
+.operation-card-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.operation-card-heading button {
+    color: #b91c1c;
+}
+
+.review-operation-card label {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    color: #475569;
+    font-size: .85rem;
+}
+
+.review-operation-card input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: .7rem;
+    font: inherit;
+    color: #111827;
+}
+
+.review-operation-card input.missing {
+    border-color: #dc2626;
+    background: #fff7f7;
+}
+
+.operation-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+    margin-top: .75rem;
+}

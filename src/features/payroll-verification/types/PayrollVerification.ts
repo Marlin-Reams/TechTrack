@@ -9,27 +9,40 @@ export interface PayrollVerification {
     status: PayrollVerificationStatus;
 
     /**
-     * What TechTrack calculated.
-     * (Derived from Operations)
+     * Hours TechTrack calculated
+     * from the repair operations.
+     */
+    expectedHours?: number;
+
+    /**
+     * Hours actually paid
+     * according to the paystub.
      */
     paidHours?: number;
 
     /**
-     * When payroll was first verified.
+     * Optional explanation when
+     * expected and paid differ.
      */
+    adjustmentReason?: string;
+
     verifiedDate?: string;
 
-    /**
-     * Present only when payroll does not match.
-     */
     issueType?: string;
 
     issueNotes?: string;
 
-    /**
-     * Present once an issue has been resolved.
-     */
     resolutionNotes?: string;
 
     resolvedDate?: string;
+
+    operationAdjustments?: PayrollOperationAdjustment[];
+}
+
+export interface PayrollOperationAdjustment {
+    date: string;
+    reason: string;
+    previousExpectedHours: number;
+    correctedExpectedHours: number;
+    changedBy: "payroll-review";
 }

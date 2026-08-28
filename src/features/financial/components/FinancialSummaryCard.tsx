@@ -38,13 +38,6 @@ export default function FinancialSummaryCard({
                 </div>
 
                 <div>
-                    <span>Clock Hours</span>
-                    <strong>
-                        {summary.weekClockHours.toFixed(1)}
-                    </strong>
-                </div>
-
-                <div>
                     <span>Goal Hours</span>
                     <strong>
                         {summary.goalHours.toFixed(1)}

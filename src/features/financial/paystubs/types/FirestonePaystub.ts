@@ -31,6 +31,8 @@ export interface EarningsSection {
     flagRate?: number;
 
     grossPay?: number;
+
+    yearToDateGross?: number;
 }
 
 export interface DeductionSection {

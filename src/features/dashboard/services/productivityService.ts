@@ -41,24 +41,45 @@ function parseLocalDate(dateString: string): Date {
     return new Date(year, month - 1, day);
 }
 
+/**
+ * Returns the date the repair should count toward production.
+ *
+ * New repairs:
+ *     completedDate
+ *
+ * Older repairs:
+ *     repairDate (fallback)
+ */
+function getProductionDate(
+    repair: StoredRepair
+): Date {
+
+    const workDate =
+        repair.completedDate ??
+        repair.header.repairDate;
+
+    return parseLocalDate(workDate);
+
+}
+
 export async function getProductivitySummary(): Promise<ProductivitySummary> {
 
     const repairs = await getCompletedRepairs();
 
     const todayRepairs = repairs.filter(repair =>
-        isToday(parseLocalDate(repair.header.repairDate))
+        isToday(getProductionDate(repair))
     );
 
     const weeklyRepairs = repairs.filter(repair =>
-        isThisWeek(parseLocalDate(repair.header.repairDate))
+        isThisWeek(getProductionDate(repair))
     );
 
     const monthlyRepairs = repairs.filter(repair =>
-        isThisMonth(parseLocalDate(repair.header.repairDate))
+        isThisMonth(getProductionDate(repair))
     );
 
     const yearlyRepairs = repairs.filter(repair =>
-        isThisYear(parseLocalDate(repair.header.repairDate))
+        isThisYear(getProductionDate(repair))
     );
 
     const todayHours = calculateHours(todayRepairs);

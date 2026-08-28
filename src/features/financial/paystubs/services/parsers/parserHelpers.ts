@@ -139,3 +139,47 @@ export function getTextAfterLabel(
     return match[1].trim();
 
 }
+
+export function getCurrentAmountFromRow(
+    text: string,
+    label: string
+): number | undefined {
+    const line = text
+        .split("\n")
+        .find(candidate =>
+            candidate.toLowerCase().includes(label.toLowerCase())
+        );
+
+    if (!line) {
+        return undefined;
+    }
+
+    const labelIndex = line.toLowerCase().indexOf(label.toLowerCase());
+    const values = line
+        .slice(labelIndex + label.length)
+        .match(/-?[\d,]+\.\d{2}/g);
+
+    if (!values || values.length < 2) {
+        return undefined;
+    }
+
+    return Math.abs(Number(values[0].replace(/,/g, "")));
+}
+
+export function getLastAmountFromRow(
+    text: string,
+    label: string
+): number | undefined {
+    const line = text
+        .split("\n")
+        .find(candidate =>
+            candidate.toLowerCase().includes(label.toLowerCase())
+        );
+
+    const values = line?.match(/-?[\d,]+\.\d{2}/g);
+    const value = values?.at(-1);
+
+    return value === undefined
+        ? undefined
+        : Math.abs(Number(value.replace(/,/g, "")));
+}

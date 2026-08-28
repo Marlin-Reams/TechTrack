@@ -17,6 +17,7 @@ interface PayrollVerificationActionsProps {
     onResolveIssue: () => void;
 
     onViewResolution: () => void;
+    onCorrectLabor: () => void;
 }
 
 export default function PayrollVerificationActions({
@@ -27,6 +28,7 @@ export default function PayrollVerificationActions({
     onEditIssue,
     onResolveIssue,
     onViewResolution,
+    onCorrectLabor,
 }: PayrollVerificationActionsProps) {
 
     const status = repairRecord.payrollVerification.status;
@@ -36,6 +38,8 @@ export default function PayrollVerificationActions({
         <section className="payroll-verification-actions-section">
 
             <h2>Actions</h2>
+
+            <p className="payroll-action-help">Correct labor articles or hours whenever the completed repair does not match payroll.</p>
 
             {status === "pending" && (
 
@@ -49,6 +53,8 @@ export default function PayrollVerificationActions({
                         Report Issue
                     </button>
 
+                    <button onClick={onCorrectLabor}>Correct Labor</button>
+
                 </div>
 
             )}
@@ -60,6 +66,8 @@ export default function PayrollVerificationActions({
                     <button onClick={onEditVerification}>
                         Edit Verification
                     </button>
+
+                    <button onClick={onCorrectLabor}>Correct Labor</button>
 
                 </div>
 
@@ -77,6 +85,8 @@ export default function PayrollVerificationActions({
                         Resolve Issue
                     </button>
 
+                    <button onClick={onCorrectLabor}>Correct Labor</button>
+
                 </div>
 
             )}
@@ -88,6 +98,8 @@ export default function PayrollVerificationActions({
                     <button onClick={onViewResolution}>
                         View Resolution
                     </button>
+
+                    <button onClick={onCorrectLabor}>Correct Labor</button>
 
                 </div>
 

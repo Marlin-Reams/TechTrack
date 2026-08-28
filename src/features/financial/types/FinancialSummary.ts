@@ -1,7 +1,6 @@
 export interface FinancialSummary {
     // Productivity
     weekFlagHours: number;
-    weekClockHours: number;
 
     // Goal Tracking
     goalHours: number;
@@ -18,13 +17,32 @@ export interface FinancialSummary {
     goalEarnings: number;
     projectedWeeklyIncome: number;
     projectedMonthlyIncome: number;
+    currentMonthPaychecks: number;
+    estimatedMonthPaychecks: number;
     projectedAnnualIncome: number;
+    yearToDateGross: number;
+    averageWeeklyGross: number;
+    remainingPayWeeks: number;
+    annualProjectionUsesYearToDate: boolean;
 
     // Deductions
     estimatedTaxes: number;
     estimatedInsurance: number;
     estimatedRetirement: number;
+    estimatedOtherDeductions: number;
 
     // Net
     estimatedTakeHome: number;
+
+    // Historical estimate quality
+    paystubsUsed: number;
+    estimatedTaxRate: number;
+
+    // Most recently imported payroll statement
+    latestPaystub?: {
+        payDate?: string;
+        grossPay?: number;
+        netPay?: number;
+        flagHours?: number;
+    };
 }

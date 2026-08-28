@@ -1,0 +1,124 @@
+.document-page-editor {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.document-page-editor header,
+.document-page-editor footer,
+.page-editor-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.document-page-editor header {
+    justify-content: space-between;
+    margin-bottom: .75rem;
+}
+
+.document-page-editor header span {
+    color: #64748b;
+    font-size: .85rem;
+}
+
+.document-preview-frame {
+    height: clamp(480px, 65vh, 700px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0f172a;
+    border-radius: 8px;
+}
+
+.document-editor-workspace {
+    display: grid;
+    grid-template-columns: minmax(360px, 2fr) minmax(280px, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.document-editor-controls {
+    position: sticky;
+    top: 1rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.document-editor-controls h3 {
+    margin: 0 0 .75rem;
+}
+
+.document-preview-frame img {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    transition: transform .2s, filter .2s, clip-path .2s;
+}
+
+.page-order-label {
+    color: #64748b;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.page-editor-actions,
+.document-page-editor footer {
+    margin-top: .75rem;
+}
+
+.page-editor-actions {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.crop-section {
+    margin-top: 1.5rem;
+}
+
+.crop-section p {
+    color: #64748b;
+    font-size: .9rem;
+}
+
+.crop-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem 1rem;
+    margin: .75rem 0;
+}
+
+.crop-controls label {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+.remove-page {
+    color: #b91c1c;
+}
+
+@media (max-width: 640px) {
+    .document-editor-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .document-editor-controls {
+        position: static;
+    }
+
+    .document-preview-frame {
+        height: 440px;
+        min-height: 360px;
+        max-height: 520px;
+    }
+    .crop-controls { grid-template-columns: 1fr; }
+}

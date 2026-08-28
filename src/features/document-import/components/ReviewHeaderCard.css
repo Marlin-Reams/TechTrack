@@ -1,0 +1,117 @@
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    margin-bottom: 1.5rem;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 1rem;
+}
+
+.review-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.review-header p {
+    margin-top: .35rem;
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.review-header strong {
+    display: block;
+    font-size: 1.6rem;
+    margin-top: .35rem;
+    color: #2e7d32;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.review-grid div {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.review-grid label {
+    display: block;
+    font-size: .85rem;
+    color: #777;
+    margin-bottom: .35rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.review-grid p {
+    margin: 0;
+    font-weight: 600;
+    color: #222;
+}
+
+@media (max-width: 768px) {
+
+    .review-header {
+        flex-direction: column;
+    }
+
+}
+
+.review-field {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.review-field span {
+    font-size: .85rem;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.review-field input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: .7rem;
+    font: inherit;
+}
+
+.review-field.missing input,
+.review-field input[aria-invalid="true"] {
+    border-color: #dc2626;
+    background: #fff7f7;
+}
+
+.review-warnings {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #fff7ed;
+    color: #9a3412;
+}
+
+.review-warnings ul {
+    margin-bottom: 0;
+}
+
+.confidence-good strong { color: #2e7d32; }
+.confidence-warning strong { color: #b45309; }
+.confidence-low strong { color: #b91c1c; }

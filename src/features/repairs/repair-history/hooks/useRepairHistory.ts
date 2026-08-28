@@ -1,28 +1,19 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
-    getCompletedRepairs,
-} from "../../repository/repairRepository";
+    getRepairHistoryPage,
+    filterRepairHistory,
+    type RepairHistoryFilters,
+} from "../../services/repairHistoryService";
 
-import type { StoredRepair }
-    from "../../types/StoredRepair";
-
-export interface RepairHistoryFilters {
-
-    payrollStatus?:
-        | "all"
-        | "pending"
-        | "verified"
-        | "issue"
-        | "resolved";
-
-}
+import type { StoredRepair } from "../../types/StoredRepair";
+import type { RepairPageCursor }
+    from "../../repository/repairRepository";
 
 export default function useRepairHistory(
-    filters?: RepairHistoryFilters
+    filters: RepairHistoryFilters = {}
 ) {
-
-    const [repairs, setRepairs] =
+    const [allRepairs, setAllRepairs] =
         useState<StoredRepair[]>([]);
 
     const [loading, setLoading] =
@@ -31,34 +22,42 @@ export default function useRepairHistory(
     const [error, setError] =
         useState<string | null>(null);
 
+    const [reloadCount, setReloadCount] = useState(0);
+    const [cursor, setCursor] = useState<RepairPageCursor | null>(null);
+    const [hasMore, setHasMore] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false);
+
+    const {
+        payrollStatus,
+        timePeriod,
+        searchText,
+        adjustedOnly,
+    } = filters;
+
     useEffect(() => {
+
+        let cancelled = false;
 
         async function loadRepairs() {
 
             try {
 
-                let repairs =
-                    await getCompletedRepairs();
+                setError(null);
 
-                if (
-                    filters?.payrollStatus &&
-                    filters.payrollStatus !== "all"
-                ) {
+                const page = await getRepairHistoryPage();
 
-                    repairs = repairs.filter(
-    repair =>
-        (
-            repair.payrollVerification?.status ??
-            "pending"
-        ) === filters.payrollStatus
-);
-
+                if (!cancelled) {
+                    setAllRepairs(page.repairs);
+                    setCursor(page.cursor);
+                    setHasMore(page.hasMore);
                 }
-
-                setRepairs(repairs);
 
             }
             catch (error) {
+
+                if (cancelled) {
+                    return;
+                }
 
                 if (error instanceof Error) {
 
@@ -76,7 +75,9 @@ export default function useRepairHistory(
             }
             finally {
 
-                setLoading(false);
+                if (!cancelled) {
+                    setLoading(false);
+                }
 
             }
 
@@ -84,7 +85,50 @@ export default function useRepairHistory(
 
         loadRepairs();
 
-    }, [filters]);
+        return () => {
+            cancelled = true;
+        };
+
+    }, [reloadCount]);
+
+    const repairs = useMemo(
+        () => filterRepairHistory(allRepairs, {
+            payrollStatus,
+            timePeriod,
+            searchText,
+            adjustedOnly,
+        }),
+        [allRepairs, payrollStatus, timePeriod, searchText, adjustedOnly]
+    );
+
+    const retry = useCallback(() => {
+        setLoading(true);
+        setReloadCount((count) => count + 1);
+    }, []);
+
+    const loadMore = useCallback(async () => {
+        if (!cursor || !hasMore || loadingMore) {
+            return;
+        }
+
+        setLoadingMore(true);
+        setError(null);
+
+        try {
+            const page = await getRepairHistoryPage(cursor);
+            setAllRepairs((current) => [...current, ...page.repairs]);
+            setCursor(page.cursor);
+            setHasMore(page.hasMore);
+        }
+        catch (error) {
+            setError(error instanceof Error
+                ? error.message
+                : "Unable to load more repair history.");
+        }
+        finally {
+            setLoadingMore(false);
+        }
+    }, [cursor, hasMore, loadingMore]);
 
     return {
 
@@ -93,6 +137,16 @@ export default function useRepairHistory(
         loading,
 
         error,
+
+        retry,
+
+        loadMore,
+
+        loadingMore,
+
+        hasMore,
+
+        loadedCount: allRepairs.length,
 
     };
 

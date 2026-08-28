@@ -14,3 +14,17 @@
     color: #666;
     font-size: 1rem;
 }
+
+@media (max-width: 700px) {
+    .payroll-verification-page {
+        padding: .75rem;
+    }
+
+    .page-title {
+        font-size: clamp(1.75rem, 9vw, 2.25rem);
+    }
+
+    .page-subtitle {
+        margin-bottom: 1rem;
+    }
+}

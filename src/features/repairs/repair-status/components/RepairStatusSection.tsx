@@ -52,11 +52,22 @@ export default function RepairStatusSection({
                                     : "status-button"
                             }
                             onClick={() =>
-                                setRepairRecord((previous) => ({
-                                    ...previous,
-                                    status: repairStatus,
-                                }))
-                            }
+    setRepairRecord((previous) => ({
+
+        ...previous,
+
+        status: repairStatus,
+
+        completedDate:
+            repairStatus === "completed"
+                ? previous.completedDate ??
+                  new Date()
+                      .toISOString()
+                      .split("T")[0]
+                : previous.completedDate,
+
+    }))
+}
                         >
                             {repairStatusMetadata[repairStatus].label}
                         </button>

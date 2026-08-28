@@ -2,26 +2,16 @@ import type {
     PayPeriod,
 } from "../../types/FirestonePaystub";
 
-import {
-    getDateAfterLabel,
-    getDateBeforeLabel,
-    getTextAfterLabel,
-} from "./parserHelpers";
+import { getDateAfterLabel } from "./parserHelpers";
 
 export function parsePayPeriod(
     documentText: string
 ): PayPeriod {
 
-    console.log("Using NEW payPeriodParser");
-    console.log(documentText);
-
     return {
 
         periodNumber:
-            getTextAfterLabel(
-                documentText,
-                "pay period"
-            ),
+            documentText.match(/pay period\s+(\d+\/\d{4})/i)?.[1],
 
         periodStart:
             getDateAfterLabel(
@@ -36,7 +26,7 @@ export function parsePayPeriod(
             ),
 
         payDate:
-            getDateBeforeLabel(
+            getDateAfterLabel(
                 documentText,
                 "pay date"
             ),

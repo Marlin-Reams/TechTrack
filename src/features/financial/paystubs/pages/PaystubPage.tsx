@@ -3,6 +3,8 @@ import { useState } from "react";
 import PaystubList from "../components/PaystubList";
 import PaystubUploader from "../components/PaystubUploader";
 
+import "./PaystubPage.css";
+
 export default function PaystubPage() {
 
     const [refreshKey, setRefreshKey] =
@@ -18,7 +20,15 @@ export default function PaystubPage() {
 
         <main className="paystub-page">
 
-            <h1>Paystubs</h1>
+            <header className="paystub-page-header">
+                <div>
+                    <span>PAYROLL RECORDS</span>
+                    <h1>Paystubs</h1>
+                </div>
+                <p className="paystub-page-intro">
+                    Import weekly statements and watch your earnings estimate improve over time.
+                </p>
+            </header>
 
             <PaystubUploader
                 onUploadComplete={handleUploadComplete}

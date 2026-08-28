@@ -15,6 +15,7 @@ export default function PaystubCard({
     const [detailsOpen, setDetailsOpen] =
         useState(false);
 
+
     const extraction =
         paystub.extraction;
 
@@ -45,6 +46,23 @@ export default function PaystubCard({
                     )}
 
                 </p>
+
+                <div className="paystub-card-actions">
+                    <a
+                        href={paystub.downloadUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={event => event.stopPropagation()}
+                    >
+                        View PDF
+                    </a>
+                </div>
+
+                {paystub.processingError && (
+                    <p className="paystub-error">
+                        {paystub.processingError}
+                    </p>
+                )}
 
                 <p>
 

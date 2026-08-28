@@ -48,3 +48,23 @@
     cursor: pointer;
     font-weight: 600;
 }
+
+.payroll-adjustment-history span{background:#f4f7f4;border-radius:7px;color:#405047;font-size:.82rem;font-weight:500;padding:.55rem .65rem}
+
+@media (max-width: 600px) {
+    .payroll-verification-section {
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .payroll-verification-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .8rem;
+    }
+
+    .payroll-verification-actions {
+        align-items: stretch;
+        flex-direction: column;
+        margin-top: 1.25rem;
+    }
+}

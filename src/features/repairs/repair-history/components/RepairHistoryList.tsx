@@ -1,30 +1,40 @@
-import styles from "./RepairHistoryList.module.css";
 
 import type { StoredRepair } from "../../types/StoredRepair";
 
-import RepairCard from "../../repair-card/RepairCard";
+import {
+    groupRepairsByDate,
+} from "../../services/repairHistoryDateUtils";
+
+import RepairHistorySection from "./RepairHistorySection";
 
 interface RepairHistoryListProps {
     repairs: StoredRepair[];
+    expandAll?: boolean;
 }
 
 export default function RepairHistoryList({
     repairs,
+    expandAll = false,
 }: RepairHistoryListProps) {
+
     if (repairs.length === 0) {
-        return (
-            <p>No repairs found.</p>
-        );
+        return <>No repairs found.</>;
     }
 
+    const sections =
+        groupRepairsByDate(repairs);
+
     return (
-        <div className={styles.repairsGrid}>
-            {repairs.map((repair) => (
-                <RepairCard
-                    key={repair.id}
-                    repair={repair}
+        <>
+            {sections.map((section) => (
+                <RepairHistorySection
+                    key={section.title}
+                    title={section.title}
+                    repairs={section.repairs}
+                    expandAll={expandAll}
                 />
             ))}
-        </div>
+        </>
     );
+
 }

@@ -13,4 +13,5 @@ export interface RepairRecord {
     notes: RepairNote;
     attachments: RepairAttachment[];
     payrollVerification: PayrollVerification;
+    completedDate?:string;
 }

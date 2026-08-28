@@ -1,0 +1,191 @@
+main.repair-history-page {
+    --history-ink: #17231c;
+    --history-muted: #647067;
+    --history-green: #315f45;
+    --history-green-dark: #244b35;
+    --history-green-soft: #e9f3ed;
+    --history-line: #dfe6e1;
+    width: min(100%, 1420px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    color: var(--history-ink);
+    padding: 0;
+}
+
+.app-body > main:has(> .repair-history-page) {
+    padding-top: 0.6rem;
+}
+
+.repair-history-page__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 0.55rem;
+}
+
+.repair-history-page__header h1 {
+    margin: 0;
+    font-size: clamp(1.7rem, 2.2vw, 2.15rem);
+    letter-spacing: -0.04em;
+}
+
+.repair-history-page__subtitle {
+    max-width: 610px;
+    margin: 0 0 0.18rem;
+    color: var(--history-muted);
+    font-size: 0.9rem;
+}
+
+.repair-history-page__command-bar {
+    margin-bottom: 0.65rem;
+    padding: 0.5rem;
+    border: 1px solid var(--history-line);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 30px rgba(33, 57, 43, 0.06);
+}
+
+.repair-history-page__command-bar .search-toolbar {
+    align-items: flex-end;
+    margin: 0;
+}
+
+.repair-history-page__search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.repair-history-page__search-wrap {
+    position: relative;
+}
+
+.repair-history-page__search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #718078;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.repair-history-page__search-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 1rem 0 2.8rem;
+    box-sizing: border-box;
+    border: 1px solid #cdd7d0;
+    border-radius: 10px;
+    outline: none;
+    color: var(--history-ink);
+    background: #f9fbfa;
+    font-size: 1rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.repair-history-page__search-input:focus {
+    border-color: var(--history-green);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(49, 95, 69, 0.13);
+}
+
+.repair-history-page .filter-panel {
+    min-width: 126px;
+    margin: 0;
+    border-color: #cdd7d0;
+    border-radius: 10px;
+}
+
+.repair-history-page .filter-panel__toggle {
+    min-height: 42px;
+    padding: 0.55rem 0.75rem;
+    color: var(--history-ink);
+    background: #f9fbfa;
+}
+
+.repair-history-page .filter-panel__content {
+    min-width: 300px;
+}
+
+.repair-history-page__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.65rem 0;
+}
+
+.repair-history-page__result-count {
+    margin: 0.45rem 0 0.65rem;
+    color: var(--history-muted);
+    font-size: 0.92rem;
+}
+
+.repair-history-page__view-switch {
+    display: inline-flex;
+    gap: 0.25rem;
+    padding: 0.22rem;
+    border: 1px solid var(--history-line);
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 5px 16px rgba(33, 57, 43, 0.05);
+    white-space: nowrap;
+}
+
+.repair-history-page__view-button {
+    padding: 0.45rem 0.8rem;
+    border: 0;
+    border-radius: 8px;
+    color: #4d5951;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 750;
+}
+
+.repair-history-page__view-button[aria-pressed="true"] {
+    color: white;
+    background: linear-gradient(135deg, var(--history-green), var(--history-green-dark));
+    box-shadow: 0 4px 12px rgba(36, 75, 53, 0.22);
+}
+
+.repair-history-page__clear {
+    border: 0;
+    color: var(--history-green-dark);
+    background: transparent;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .repair-history-page__header {
+        display: block;
+    }
+
+    .repair-history-page__subtitle {
+        margin-top: 0.35rem;
+    }
+
+    .repair-history-page__controls {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .repair-history-page__view-switch {
+        width: 100%;
+    }
+
+    .repair-history-page__view-button {
+        flex: 1;
+    }
+
+    .repair-history-page .filter-panel,
+    .repair-history-page .filter-panel__content {
+        width: 100%;
+        min-width: 0;
+    }
+}

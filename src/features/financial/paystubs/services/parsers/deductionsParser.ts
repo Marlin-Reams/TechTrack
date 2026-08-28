@@ -2,9 +2,7 @@ import type {
     DeductionSection,
 } from "../../types/FirestonePaystub";
 
-import {
-    getAmountAfterLabel,
-} from "./parserHelpers";
+import { getCurrentAmountFromRow } from "./parserHelpers";
 
 export function parseDeductions(
     sectionText: string
@@ -13,31 +11,31 @@ export function parseDeductions(
     return {
 
         medical:
-            getAmountAfterLabel(
+            getCurrentAmountFromRow(
                 sectionText,
                 "medical"
             ),
 
         dental:
-            getAmountAfterLabel(
+            getCurrentAmountFromRow(
                 sectionText,
                 "dental"
             ),
 
         vision:
-            getAmountAfterLabel(
+            getCurrentAmountFromRow(
                 sectionText,
                 "vision"
             ),
 
         loanRepayment:
-            getAmountAfterLabel(
+            getCurrentAmountFromRow(
                 sectionText,
                 "loan repayment"
             ),
 
         totalDeductions:
-            getAmountAfterLabel(
+            getCurrentAmountFromRow(
                 sectionText,
                 "total deductions"
             ),

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -10,6 +10,7 @@ import {
     DollarSign,
     LayoutDashboard,
     Menu,
+    Bell,
     Settings,
     Wrench,
 } from "lucide-react";
@@ -18,8 +19,25 @@ import "./Sidebar.css";
 
 export default function Sidebar() {
 
+    const mobileQuery = "(max-width: 700px)";
+    const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileQuery).matches);
+
     const [collapsed, setCollapsed] =
-        useState(false);
+        useState(() => window.matchMedia(mobileQuery).matches);
+
+    useEffect(() => {
+        const media = window.matchMedia(mobileQuery);
+        const handleChange = (event: MediaQueryListEvent) => {
+            setIsMobile(event.matches);
+            setCollapsed(event.matches);
+        };
+        media.addEventListener("change", handleChange);
+        return () => media.removeEventListener("change", handleChange);
+    }, []);
+
+    const closeMobileMenu = () => {
+        if (isMobile) setCollapsed(true);
+    };
 
     const [repairsOpen, setRepairsOpen] =
         useState(true);
@@ -35,6 +53,7 @@ export default function Sidebar() {
                     ? "sidebar collapsed"
                     : "sidebar"
             }
+            aria-label="Primary navigation"
         >
 
             <button
@@ -42,6 +61,7 @@ export default function Sidebar() {
                 onClick={() =>
                     setCollapsed(!collapsed)
                 }
+                aria-label={collapsed ? "Open navigation" : "Close navigation"}
             >
                 <Menu size={24} />
             </button>
@@ -50,7 +70,7 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/">
+                    <NavLink to="/" onClick={closeMobileMenu}>
 
                         <LayoutDashboard size={20} />
 
@@ -96,19 +116,25 @@ export default function Sidebar() {
                         <ul>
 
                             <li>
-                                <NavLink to="/repairs/new">
+                                <NavLink to="/repairs/scan" onClick={closeMobileMenu}>
+                                    📷 Scan Repair Order
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to="/repairs/new" onClick={closeMobileMenu}>
                                     New Repair
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/repairs/work">
+                                <NavLink to="/repairs/work" onClick={closeMobileMenu}>
                                     Work In Progress
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/repairs/history">
+                                <NavLink to="/repairs/history" onClick={closeMobileMenu}>
                                     Repair History
                                 </NavLink>
                             </li>
@@ -121,7 +147,7 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/vehicles">
+                    <NavLink to="/vehicles" onClick={closeMobileMenu}>
 
                         <Car size={20} />
 
@@ -135,7 +161,7 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/knowledge">
+                    <NavLink to="/knowledge" onClick={closeMobileMenu}>
 
                         <BookOpen size={20} />
 
@@ -181,14 +207,20 @@ export default function Sidebar() {
                         <ul>
 
                             <li>
-                                <NavLink to="/financial">
+                                <NavLink to="/financial" end onClick={closeMobileMenu}>
                                     Dashboard
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/financial/paystubs">
+                                <NavLink to="/financial/paystubs" onClick={closeMobileMenu}>
                                     Paystubs
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink to="/payroll-verification" onClick={closeMobileMenu}>
+                                    Payroll Review
                                 </NavLink>
                             </li>
 
@@ -200,7 +232,7 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/reports">
+                    <NavLink to="/reports" onClick={closeMobileMenu}>
 
                         <BarChart3 size={20} />
 
@@ -214,7 +246,7 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/labor-library">
+                    <NavLink to="/labor-library" onClick={closeMobileMenu}>
 
                         <Settings size={20} />
 
@@ -228,7 +260,16 @@ export default function Sidebar() {
 
                 <li>
 
-                    <NavLink to="/settings">
+                    <NavLink to="/reminders" onClick={closeMobileMenu}>
+                        <Bell size={20} />
+                        {!collapsed && (<span>Notes & Reminders</span>)}
+                    </NavLink>
+
+                </li>
+
+                <li>
+
+                    <NavLink to="/settings" onClick={closeMobileMenu}>
 
                         <Settings size={20} />
 

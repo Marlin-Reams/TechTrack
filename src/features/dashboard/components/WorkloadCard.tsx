@@ -98,7 +98,7 @@ export default function WorkloadCard({
                         className="status-card"
                         onClick={() =>
                             navigate(
-                                "/repairs/history?payroll=pending"
+                                "/payroll-verification"
                             )
                         }
                     >
@@ -141,6 +141,15 @@ export default function WorkloadCard({
 
                 <div className="payroll-details">
 
+    <button
+    className="payroll-difference-button"
+    onClick={() =>
+        navigate(
+            "/repairs/history?adjusted=true"
+        )
+    }
+>
+
     <div className="detail-label">
         Difference
     </div>
@@ -155,6 +164,8 @@ export default function WorkloadCard({
         {difference >= 0 ? "+" : ""}
         {difference.toFixed(1)}
     </div>
+
+</button>
 
 </div>
 

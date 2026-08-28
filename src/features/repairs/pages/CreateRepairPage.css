@@ -46,3 +46,21 @@
 .save-repair-button:hover {
     background: #1565c0;
 }
+
+@media (max-width: 700px) {
+    .create-repair-page {
+        gap: 1rem;
+    }
+
+    .repair-card {
+        padding: 1rem;
+    }
+
+    .repair-actions {
+        padding-bottom: 1rem;
+    }
+
+    .save-repair-button {
+        width: 100%;
+    }
+}

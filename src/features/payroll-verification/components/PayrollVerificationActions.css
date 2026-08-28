@@ -2,7 +2,11 @@
     margin-top: 1.5rem;
 }
 
+.payroll-action-help { color:#68756c; margin:.25rem 0 .75rem; }
+
 .payroll-verification-actions {
     display: flex;
     gap: 1rem;
 }
+
+.payroll-verification-actions button{background:#315f42;border:1px solid #315f42;border-radius:8px;color:#fff;cursor:pointer;font-weight:750;padding:.6rem .9rem}.payroll-verification-actions button+button{background:#fff;color:#315f42}

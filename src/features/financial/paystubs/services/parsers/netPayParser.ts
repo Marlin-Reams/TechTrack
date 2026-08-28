@@ -2,9 +2,7 @@ import type {
     NetPaySection,
 } from "../../types/FirestonePaystub";
 
-import {
-    getAmountAfterLabel,
-} from "./parserHelpers";
+import { getLastAmountFromRow } from "./parserHelpers";
 
 export function parseNetPay(
     sectionText: string
@@ -13,9 +11,9 @@ export function parseNetPay(
     return {
 
         amount:
-            getAmountAfterLabel(
+            getLastAmountFromRow(
                 sectionText,
-                "net pay"
+                "bank transfer"
             ),
 
     };

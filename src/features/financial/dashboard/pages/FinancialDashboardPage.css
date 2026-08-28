@@ -1,115 +1,12 @@
-.financial-dashboard {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 24px;
-
-    padding: 24px;
-
-}
-
-.financial-dashboard-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-
-    gap: 24px;
-
-}
-
-.financial-summary-card,
-.payroll-compensation-card,
-.payroll-deductions-card,
-.payroll-verification-card {
-
-    background: white;
-
-    border: 1px solid #d9d9d9;
-
-    border-radius: 10px;
-
-    padding: 20px;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-
-}
-
-.financial-summary-card h2,
-.payroll-compensation-card h2,
-.payroll-deductions-card h2,
-.payroll-verification-card h2 {
-
-    margin: 0 0 20px;
-
-    font-size: 1.25rem;
-
-}
-
-.summary-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-
-    gap: 16px;
-
-}
-
-.summary-grid div {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 6px;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    background: #f7f7f7;
-
-}
-
-.summary-grid span {
-
-    font-size: 0.85rem;
-
-    color: #666;
-
-}
-
-.summary-grid strong {
-
-    font-size: 1.25rem;
-
-    font-weight: 600;
-
-    color: #222;
-
-}
-
-@media (max-width: 768px) {
-
-    .financial-dashboard {
-
-        padding: 16px;
-
-    }
-
-    .financial-dashboard-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    .summary-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-}
+.financial-dashboard { display:flex; flex-direction:column; gap:.85rem; max-width:1500px; margin:0 auto; padding:.8rem 1.25rem 1.25rem; }
+.financial-dashboard-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.85rem; }
+.financial-summary-card,.payroll-compensation-card,.payroll-deductions-card,.payroll-verification-card { background:#fff; border:1px solid #dbe3dc; border-radius:.85rem; box-shadow:0 7px 22px rgba(28,49,36,.06); padding:1rem; }
+.financial-summary-card h2,.payroll-compensation-card h2,.payroll-deductions-card h2,.payroll-verification-card h2 { color:var(--app-text, #17251c); font-size:1.15rem; margin:0 0 .7rem; }
+.financial-card-heading { align-items:center; display:flex; justify-content:space-between; gap:1rem; }
+.financial-card-heading span { color:var(--app-muted, #657269); font-size:.78rem; margin-bottom:.7rem; }
+.summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:.55rem; }
+.summary-grid div { background:#f6f8f6; border-radius:.65rem; display:flex; flex-direction:column; gap:.18rem; min-width:0; padding:.65rem .75rem; }
+.summary-grid span { color:var(--app-muted, #68726b); font-size:.77rem; line-height:1.2; }
+.summary-grid strong { color:var(--app-text, #1f2922); font-size:1.05rem; font-weight:700; overflow-wrap:anywhere; }
+@media(max-width:900px){.financial-dashboard-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.financial-dashboard{padding:.65rem}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.financial-card-heading{align-items:start;flex-direction:column;gap:0}}

@@ -61,3 +61,16 @@
 .edit-button:hover {
     background: #1d4ed8;
 }
+
+@media (max-width: 700px) {
+    .labor-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .labor-table th,
+    .labor-table td {
+        padding: .7rem .8rem;
+    }
+}

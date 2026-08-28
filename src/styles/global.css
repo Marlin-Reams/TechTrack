@@ -8,50 +8,137 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: clip;
+}
+
+#root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  overflow: clip;
+  background: var(--app-bg);
+  color: var(--app-text);
 }
 
-.app-layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+:root{--app-bg:#f5f7fb;--app-header:#fff;--app-surface:#fff;--app-surface-soft:#f6f8f6;--app-surface-muted:#eef2ef;--app-text:#18251d;--app-muted:#667269;--app-border:#dbe3dc;--app-accent:#3f6b4d;--app-accent-soft:#e9f3ed;--app-shadow:rgba(28,49,36,.07)}
+:root[data-theme="dark"]{--app-bg:#0f1512;--app-header:#151d19;--app-surface:#18221d;--app-surface-soft:#202c26;--app-surface-muted:#26332c;--app-text:#edf4ef;--app-muted:#aab9af;--app-border:#35443b;--app-accent:#79aa87;--app-accent-soft:#24392b;--app-shadow:rgba(0,0,0,.3)}
 
-.app-layout > header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 1rem 1.5rem;
-
-  border-bottom: 1px solid #ddd;
-}
-
-.app-body {
-  display: flex;
-  flex: 1;
-}
-
-.app-body nav {
-  width: 220px;
-
-  padding: 1rem;
-
-  border-right: 1px solid #ddd;
-}
-
-.app-body main {
-  flex: 1;
-
-  padding: 2rem;
-}
+/* App-wide dark theme, including feature screens built before theme variables. */
+[data-theme="dark"] .app-body>main{background:var(--app-bg);color:var(--app-text)}
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] h4,[data-theme="dark"] strong{color:var(--app-text)}
+[data-theme="dark"] p,[data-theme="dark"] small,[data-theme="dark"] label{color:var(--app-muted)}
+[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#111a16!important;border-color:var(--app-border)!important;color:var(--app-text)!important}
+[data-theme="dark"] input::placeholder,[data-theme="dark"] textarea::placeholder{color:#7f9186}
+[data-theme="dark"] button{border-color:var(--app-border)}
+[data-theme="dark"] .report-kpi,[data-theme="dark"] .report-card,[data-theme="dark"] .payroll-summary-item,[data-theme="dark"] .payroll-review-card,[data-theme="dark"] .financial-summary-card,[data-theme="dark"] .payroll-compensation-card,[data-theme="dark"] .payroll-deductions-card,[data-theme="dark"] .payroll-verification-card,[data-theme="dark"] .paystub-page>section:first-of-type,[data-theme="dark"] .paystub-view-toggle,[data-theme="dark"] .paystub-card,[data-theme="dark"] .paystub-calendar-shell,[data-theme="dark"] .repair-history-page__command-bar,[data-theme="dark"] .repair-history-page__view-switch,[data-theme="dark"] .repair-header,[data-theme="dark"] .operations-section,[data-theme="dark"] .notes-section,[data-theme="dark"] .attachments-section,[data-theme="dark"] .repair-status-section,[data-theme="dark"] .review-header-card,[data-theme="dark"] .review-operation-card,[data-theme="dark"] .document-page-editor{background:var(--app-surface)!important;border-color:var(--app-border)!important;box-shadow:0 7px 22px var(--app-shadow)!important;color:var(--app-text)!important}
+[data-theme="dark"] .summary-grid div,[data-theme="dark"] .report-kpi-icon,[data-theme="dark"] .metric-picker,[data-theme="dark"] .payroll-filter-tabs,[data-theme="dark"] .payroll-list-head,[data-theme="dark"] .paystub-weekday{background:var(--app-surface-soft);color:var(--app-muted)}
+[data-theme="dark"] .operations-table-row,[data-theme="dark"] .payroll-review-row,[data-theme="dark"] .paystub-day{border-color:var(--app-border)}
+[data-theme="dark"] .payroll-review-row:hover{background:#202c26}[data-theme="dark"] .payroll-review-row.selected{background:#253a2c}
+[data-theme="dark"] .paystub-day.empty{background:#121a16}[data-theme="dark"] .paystub-calendar-event{background:#263a2d;color:#bfe1c8}
+[data-theme="dark"] .bar-track{background:linear-gradient(#26312b,#202a25)}[data-theme="dark"] .donut>div{background:var(--app-surface)}
+[data-theme="dark"] .reports-page,[data-theme="dark"] .payroll-review-page,[data-theme="dark"] .financial-dashboard,[data-theme="dark"] .paystub-page{color:var(--app-text)}
+[data-theme="dark"] main.repair-history-page{--history-ink:var(--app-text);--history-muted:var(--app-muted);--history-green:var(--app-accent);--history-green-dark:#568666;--history-green-soft:var(--app-accent-soft);--history-line:var(--app-border)}
+[data-theme="dark"] .repair-history-page__search-input,[data-theme="dark"] .repair-history-page .filter-panel__toggle{background:#111a16;color:var(--app-text)}
+[data-theme="dark"] .sidebar{background:#111915;border-color:#2b3931}[data-theme="dark"] .sidebar-toggle{border-color:#2b3931}
+[data-theme="dark"] .sidebar a:hover,[data-theme="dark"] .sidebar-group:hover{background:#26342d}[data-theme="dark"] .sidebar a.active{background:#3f6b4d}
+[data-theme="dark"] .payroll-verification-section,
+[data-theme="dark"] .repair-summary-section{background:var(--app-surface);border-color:var(--app-border);box-shadow:0 7px 22px var(--app-shadow);color:var(--app-text)}
+[data-theme="dark"] .payroll-item span,
+[data-theme="dark"] .repair-summary-subtitle{color:var(--app-text)}
+[data-theme="dark"] .payroll-adjustment-history span,
+[data-theme="dark"] .repair-summary-table thead{background:var(--app-surface-soft);color:var(--app-text)}
+[data-theme="dark"] .repair-summary-table td{border-color:var(--app-border)}
+[data-theme="dark"] .repair-summary-table tfoot td{border-color:#829488}
+[data-theme="dark"] .dashboard-card,
+[data-theme="dark"] .status-card,
+[data-theme="dark"] .verification-card,
+[data-theme="dark"] .settings-card,
+[data-theme="dark"] .labor-card,
+[data-theme="dark"] .repair-card,
+[data-theme="dark"] .scan-card,
+[data-theme="dark"] .review-source-pages,
+[data-theme="dark"] .labor-lookup-dropdown,
+[data-theme="dark"] .payroll-operations-editor{background:var(--app-surface)!important;border-color:var(--app-border)!important;box-shadow:0 7px 22px var(--app-shadow)!important;color:var(--app-text)!important}
+[data-theme="dark"] .dashboard-card header,
+[data-theme="dark"] .payroll-details,
+[data-theme="dark"] .selected-files li,
+[data-theme="dark"] .payroll-editor-row,
+[data-theme="dark"] .payroll-editor-table{border-color:var(--app-border)!important}
+[data-theme="dark"] .status-card:hover,
+[data-theme="dark"] .labor-lookup-item:hover,
+[data-theme="dark"] .labor-lookup-item.active{background:var(--app-surface-muted)!important}
+[data-theme="dark"] .status-card .count,
+[data-theme="dark"] .detail-value,
+[data-theme="dark"] .labor-lookup-item strong,
+[data-theme="dark"] .labor-lookup-item div:nth-child(2),
+[data-theme="dark"] .review-source-pages>p{color:var(--app-text)!important}
+[data-theme="dark"] .labor-table tbody tr:nth-child(even),
+[data-theme="dark"] .payroll-editor-head{background:var(--app-surface-soft)}
+[data-theme="dark"] .labor-table tbody tr:hover{background:var(--app-surface-muted)}
+[data-theme="dark"] .labor-table td{border-color:var(--app-border)}
+[data-theme="dark"] .review-source-grid img{background:#111a16;border-color:var(--app-border)}
+[data-theme="dark"] .filter-panel__content{background:var(--app-surface);border-color:var(--app-border);color:var(--app-text);box-shadow:0 10px 28px var(--app-shadow)}
+[data-theme="dark"] .payroll-verification-actions button+button,
+[data-theme="dark"] .payroll-refresh,
+[data-theme="dark"] .verified-range button.active{background:var(--app-surface-soft);color:var(--app-text)}
+[data-theme="dark"] .payroll-adjustment-history span,
+[data-theme="dark"] .remove-labor{background:var(--app-surface-soft);color:#ef8c79}
+[data-theme="dark"] .ocr-usage{background:#173022;border-color:#38664a;color:#b7e3c3}
+[data-theme="dark"] .ocr-usage-warning{background:#352d17;border-color:#746124;color:#f2d779}
+[data-theme="dark"] .ocr-usage-danger,
+[data-theme="dark"] .scan-error,
+[data-theme="dark"] .review-error{background:#351c1a;border-color:#713b35;color:#f3a69c}
+[data-theme="dark"] .scan-status{background:#172942;color:#a9cbff}
+[data-theme="dark"] .financial-dashboard h2,
+[data-theme="dark"] .financial-dashboard .summary-grid strong,
+[data-theme="dark"] .paystub-page h1,
+[data-theme="dark"] .paystub-page h2,
+[data-theme="dark"] .paystub-card strong,
+[data-theme="dark"] .payroll-review-row>strong,
+[data-theme="dark"] .payroll-review-row,
+[data-theme="dark"] .payroll-empty strong,
+[data-theme="dark"] .reports-page,
+[data-theme="dark"] .reports-page strong,
+[data-theme="dark"] .operations-table-row strong,
+[data-theme="dark"] .bar-value,
+[data-theme="dark"] .bar-column>span{color:var(--app-text)!important}
+[data-theme="dark"] .financial-dashboard .summary-grid span,
+[data-theme="dark"] .financial-card-heading span,
+[data-theme="dark"] .paystub-page-intro,
+[data-theme="dark"] .paystub-card p,
+[data-theme="dark"] .paystub-card span,
+[data-theme="dark"] .payroll-review-row small,
+[data-theme="dark"] .payroll-review-row .vehicle-cell small,
+[data-theme="dark"] .reports-page .report-kpi span,
+[data-theme="dark"] .reports-page .report-kpi small,
+[data-theme="dark"] .reports-page .chart-hint,
+[data-theme="dark"] .reports-page .chart-legend,
+[data-theme="dark"] .reports-page .health-legend{color:var(--app-muted)!important}
+[data-theme="dark"] .paystub-card-actions a,
+[data-theme="dark"] .paystub-calendar-header button,
+[data-theme="dark"] .paystub-day-number,
+[data-theme="dark"] .payroll-details-link{color:var(--app-text)!important}
+[data-theme="dark"] .payroll-review-row:hover,
+[data-theme="dark"] .payroll-review-row.selected{background:var(--app-surface-muted)!important}
+[data-theme="dark"] .bar-track{background:linear-gradient(#26332b,#1f2b24)}
+[data-theme="dark"] .donut>div{background:var(--app-surface)}
+@media(max-width:600px){.theme-toggle span{display:none}}
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
 }

@@ -31,18 +31,27 @@ export async function extractPdfText(
         const content =
             await page.getTextContent();
 
-        const pageText =
-            content.items
-                .map((item) => {
+        const rows = new Map<number, Array<{ x: number; text: string }>>();
 
-                    if ("str" in item) {
-                        return item.str;
-                    }
+        for (const item of content.items) {
+            if (!("str" in item) || !item.str.trim()) {
+                continue;
+            }
 
-                    return "";
+            const x = item.transform[4];
+            const y = Math.round(item.transform[5] * 2) / 2;
+            const row = rows.get(y) ?? [];
+            row.push({ x, text: item.str });
+            rows.set(y, row);
+        }
 
-                })
-                .join(" ");
+        const pageText = [...rows.entries()]
+            .sort(([firstY], [secondY]) => secondY - firstY)
+            .map(([, row]) => row
+                .sort((first, second) => first.x - second.x)
+                .map(item => item.text)
+                .join(" "))
+            .join("\n");
 
         text += pageText + "\n";
     }

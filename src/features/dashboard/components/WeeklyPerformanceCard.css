@@ -17,12 +17,12 @@
     margin: .35rem 0;
 
     font-size: 1.35rem;
-    color: #666;
+    color: var(--app-muted, #666);
 }
 
 .weekly-performance small {
     font-size: 1.05rem;
-    color: #555;
+    color: var(--app-muted, #555);
 }
 
 .weekly-performance progress {

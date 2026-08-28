@@ -18,6 +18,8 @@ export function createRepairRecord(): RepairRecord {
             engine: "",
             repairDate: getToday(),
             mileage: null,
+            customerName: "",
+            serviceAdvisor: "",
         },
 
         operations: [],

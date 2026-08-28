@@ -1,15 +1,15 @@
 .dashboard-card {
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
+  background: var(--app-surface, #ffffff);
+  border: 1px solid var(--app-border, #d9d9d9);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px var(--app-shadow, rgba(0, 0, 0, 0.06));
 }
 
 .dashboard-card header {
   margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid var(--app-border, #ececec);
 }
 
 .dashboard-card h2 {

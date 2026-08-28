@@ -20,6 +20,7 @@ import PayrollResolutionForm
 
 import RepairSummarySection
     from "../components/RepairSummarySection";
+import PayrollOperationsEditor from "../components/PayrollOperationsEditor";
 
 import {
     getRepair,
@@ -30,7 +31,9 @@ import {
     updatePayrollVerification,
     reportPayrollIssue,
     resolvePayrollIssue,
+    savePayrollOperationCorrection,
 } from "../services/payrollVerificationService";
+import type { Operation } from "../../repairs/operations/types/Operation";
 
 import type { RepairRecord }
     from "../../repairs/repair-entry/types/RepairRecord";
@@ -41,7 +44,8 @@ type PayrollVerificationPageMode =
     | "createIssue"
     | "editIssue"
     | "resolveIssue"
-    | "viewResolution";
+    | "viewResolution"
+    | "editOperations";
 
 export default function PayrollVerificationPage() {
 
@@ -213,6 +217,13 @@ export default function PayrollVerificationPage() {
 
     }
 
+    async function handleSaveOperations(operations: Operation[], reason: string) {
+        if (!repairId || !repairRecord) return;
+        const updatedRecord = await savePayrollOperationCorrection(repairId, repairRecord, operations, reason);
+        setRepairRecord(updatedRecord);
+        setPageMode("actions");
+    }
+
     if (!repairRecord) {
 
         return (
@@ -266,6 +277,9 @@ export default function PayrollVerificationPage() {
                     }
                     onViewResolution={() =>
                         setPageMode("viewResolution")
+                    }
+                    onCorrectLabor={() =>
+                        setPageMode("editOperations")
                     }
                 />
 
@@ -349,10 +363,18 @@ export default function PayrollVerificationPage() {
 
             )}
 
-            <RepairSummarySection
+            {pageMode === "editOperations" && (
+                <PayrollOperationsEditor
+                    operations={repairRecord.operations}
+                    onSave={handleSaveOperations}
+                    onCancel={() => setPageMode("actions")}
+                />
+            )}
+
+            {pageMode !== "editOperations" && <RepairSummarySection
                 header={repairRecord.header}
                 operations={repairRecord.operations}
-            />
+            />}
 
         </main>
 

@@ -2,6 +2,8 @@ export interface PayrollExtraction {
 
     grossPay?: number;
 
+    yearToDateGross?: number;
+
     netPay?: number;
 
     regularHours?: number;

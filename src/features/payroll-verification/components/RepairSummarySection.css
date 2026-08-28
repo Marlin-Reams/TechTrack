@@ -44,3 +44,24 @@
     font-weight: bold;
     padding-top: 1rem;
 }
+
+@media (max-width: 700px) {
+    .repair-summary-section {
+        margin-top: 1rem;
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .repair-summary-title {
+        font-size: 1.45rem;
+    }
+
+    .repair-summary-table {
+        min-width: 560px;
+    }
+
+    .repair-summary-table th,
+    .repair-summary-table td {
+        padding: .7rem;
+    }
+}

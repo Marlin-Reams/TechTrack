@@ -43,3 +43,18 @@
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
 }
+
+@media (max-width: 700px) {
+    .labor-library-page {
+        gap: 1rem;
+        padding: .7rem;
+    }
+
+    .labor-library-title {
+        font-size: clamp(1.75rem, 9vw, 2.25rem);
+    }
+
+    .labor-card {
+        padding: 1rem;
+    }
+}

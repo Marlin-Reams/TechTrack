@@ -124,6 +124,17 @@ export default function PayrollVerificationHistory({
 
                 )}
 
+                {(payroll.operationAdjustments?.length ?? 0) > 0 && (
+                    <div className="payroll-item payroll-item-full payroll-adjustment-history">
+                        <label>Labor correction history</label>
+                        {[...(payroll.operationAdjustments ?? [])].reverse().map((adjustment, index) => (
+                            <span key={`${adjustment.date}-${index}`}>
+                                {adjustment.previousExpectedHours.toFixed(1)} → {adjustment.correctedExpectedHours.toFixed(1)} hours · {adjustment.reason} · {new Date(adjustment.date).toLocaleString()}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
             </div>
 
         </section>

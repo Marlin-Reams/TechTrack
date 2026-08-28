@@ -22,6 +22,8 @@ export default function PayrollVerificationCard({
     summary,
 }: Props) {
 
+    const paystub = summary.latestPaystub;
+
     return (
 
         <section className="payroll-verification-card">
@@ -31,7 +33,7 @@ export default function PayrollVerificationCard({
             <div className="summary-grid">
 
                 <div>
-                    <span>Calculated Gross</span>
+                    <span>Current Expected Gross</span>
                     <strong>
                         {formatCurrency(
                             summary.grossEarnings,
@@ -40,36 +42,36 @@ export default function PayrollVerificationCard({
                 </div>
 
                 <div>
-                    <span>Actual Earnings Used</span>
+                    <span>Latest Imported Gross</span>
                     <strong>
-                        {formatCurrency(
-                            summary.actualEarnings,
-                        )}
+                        {paystub?.grossPay === undefined
+                            ? "-"
+                            : formatCurrency(paystub.grossPay)}
                     </strong>
                 </div>
 
                 <div>
-                    <span>Guarantee Earnings</span>
+                    <span>Latest Net Pay</span>
                     <strong>
-                        {formatCurrency(
-                            summary.guaranteeEarnings,
-                        )}
+                        {paystub?.netPay === undefined
+                            ? "-"
+                            : formatCurrency(paystub.netPay)}
                     </strong>
                 </div>
 
                 <div>
-                    <span>Difference</span>
+                    <span>Latest Flag Hours</span>
                     <strong>
-                        {formatCurrency(
-                            summary.differenceFromGuarantee,
-                        )}
+                        {paystub?.flagHours === undefined
+                            ? "-"
+                            : paystub.flagHours.toFixed(1)}
                     </strong>
                 </div>
 
                 <div>
-                    <span>Status</span>
+                    <span>Latest Pay Date</span>
                     <strong>
-                        Pending Paystub Verification
+                        {paystub?.payDate ?? "No paystub imported"}
                     </strong>
                 </div>
 

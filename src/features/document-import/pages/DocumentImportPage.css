@@ -1,0 +1,177 @@
+.document-import-page {
+
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+
+}
+
+.scan-card {
+
+    width: 100%;
+    padding: 3rem;
+
+    border: 2px dashed #3b82f6;
+    border-radius: 18px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.scan-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.camera-icon {
+
+    font-size: 64px;
+
+    margin-bottom: 1rem;
+
+}
+
+.selected-files {
+
+    margin-top: 2rem;
+
+}
+
+.ocr-usage {
+    margin: 1.25rem 0;
+    padding: 1rem;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.ocr-usage > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ocr-usage progress {
+    width: 100%;
+    margin: .75rem 0 .35rem;
+}
+
+.ocr-usage-warning {
+    border-color: #fde68a;
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.ocr-usage-danger {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.visually-hidden-file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.selected-pages {
+    margin-top: 2rem;
+}
+
+.selected-pages-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.selected-pages-heading p {
+    margin: .25rem 0 0;
+}
+
+.selected-pages-heading strong {
+    color: #166534;
+}
+
+.page-editor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+
+.start-scan-button {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.scan-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1e40af;
+}
+
+@media (max-width: 640px) {
+    .document-import-page {
+        padding: 1rem;
+    }
+
+    .selected-pages-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .page-editor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ocr-usage > div {
+        flex-direction: column;
+        gap: .25rem;
+    }
+}
+
+.selected-files ul {
+    padding: 0;
+    list-style: none;
+}
+
+.selected-files li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.selected-files li button {
+    color: #b91c1c;
+}
+
+.scan-error {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #991b1b;
+}

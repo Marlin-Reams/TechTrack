@@ -91,6 +91,9 @@ class FirestonePaystubParser implements PaystubParser {
                 grossPay:
                     paystub.earnings.grossPay,
 
+                yearToDateGross:
+                    paystub.earnings.yearToDateGross,
+
                 flatRateHours:
                     paystub.earnings.flagHours,
 
@@ -126,15 +129,31 @@ class FirestonePaystubParser implements PaystubParser {
                 )
             ) as PayrollExtraction;
 
+            const requiredValues = [
+                cleanedExtraction.payDate,
+                cleanedExtraction.grossPay,
+                cleanedExtraction.netPay,
+                cleanedExtraction.flatRateHours,
+            ];
+
+            const foundValues = Object.values(cleanedExtraction).length;
+            const confidence = Math.min(1, foundValues / 13);
+
+            if (requiredValues.some(value => value === undefined)) {
+                throw new Error(
+                    "The PDF was recognized, but key payroll values could not be read."
+                );
+            }
+
             return {
 
                 success: true,
 
                 extraction: cleanedExtraction,
 
-                confidence: 0.98,
+                confidence,
 
-                parserVersion: "3.0.0"
+                parserVersion: "5.0.0"
 
             };
 
@@ -146,7 +165,7 @@ class FirestonePaystubParser implements PaystubParser {
 
                 confidence: 0,
 
-                parserVersion: "3.0.0",
+                parserVersion: "5.0.0",
 
                 error:
                     error instanceof Error
