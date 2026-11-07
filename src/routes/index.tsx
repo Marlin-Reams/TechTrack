@@ -73,12 +73,12 @@ const router = createBrowserRouter([
                         element: <CreateRepairPage />,
                     },
                     {
-                        path: "/payroll-verification/:repairId",
-                        element: <PayrollVerificationPage />,
-                    },
-                    {
                         path: "/payroll-verification/frh-scan",
                         element: <FrhReportScanPage />,
+                    },
+                    {
+                        path: "/payroll-verification/:repairId",
+                        element: <PayrollVerificationPage />,
                     },
                     {
                         path: "/payroll-verification",
