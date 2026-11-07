@@ -24,6 +24,7 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      - run: node --experimental-strip-types --test tests/frh.test.mjs
       - run: npm run build
       - run: npm run lint
       - run: npm run check:ocr
