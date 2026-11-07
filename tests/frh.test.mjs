@@ -70,15 +70,14 @@ test("comparison cannot mark an unvalidated OCR report as exact", () => {
     assert.equal(compareFrhToRepairs(parsed, [repair])[0].status, "review-required");
 });
 
-test("later 16.8 total sample does not silently accept inconsistent rows", () => {
+test("Nov 5 printed 13.3 total is flagged against listed 13.9 hours", () => {
     const text = [
         ...rows.map(row => `RO ${row.ro} ${row.hours.toFixed(1)}`),
         "RO 245229 1.8", "RO 245226 2.6", "RO 245227 1.2",
         "RO 245228 0.3", "RO 245236 0.6",
-        "RO 245242 1.0", "RO 245244 0.7", "RO 245246 0.2",
-        "RO 245249 1.0", "TOTAL 16.8",
+        "TOTAL 13.3",
     ].join("\n");
     const parsed = parseFrhPreview(text);
-    assert.equal(parsed.calculatedTotal, 16.2);
+    assert.equal(parsed.calculatedTotal, 13.9);
     assert.ok(parsed.warnings.some(warning => warning.includes("differs from printed")));
 });
