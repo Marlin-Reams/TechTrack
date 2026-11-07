@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { scanRepairOrder } from "../../document-import/services/ocr/ocrApi";
+import { parseFrhPreview } from "../services/frhParser";
 
 export default function FrhReportScanPage() {
     const [files, setFiles] = useState<File[]>([]);
@@ -27,6 +28,8 @@ export default function FrhReportScanPage() {
         }
     }
 
+    const previews = results.map(result => ({ name: result.name, preview: parseFrhPreview(result.layoutText || result.normalizedText) }));
+
     const text = results.map(result =>
         `=== ${result.name} ===\nLAYOUT TEXT\n${result.layoutText}\n\nNORMALIZED TEXT\n${result.normalizedText}`
     ).join("\n\n");
@@ -46,6 +49,14 @@ export default function FrhReportScanPage() {
             {error && <p role="alert">{error}</p>}
             {results.length > 0 && (
                 <section>
+                    <h2>FRH extraction preview</h2>
+                    <p><strong>Preview only.</strong> No repairs will be completed or payroll verified by this screen.</p>
+                    {previews.map(({ name, preview }) => <section key={name}>
+                        <h3>{name}</h3>
+                        <p>{preview.rows.length} RO rows found. Parsed total: {preview.calculatedTotal.toFixed(1)} hours. Printed total: {preview.printedTotal === null ? "Not detected" : preview.printedTotal.toFixed(1) + " hours"}.</p>
+                        <ul>{preview.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
+                        {preview.rows.length > 0 && <table><thead><tr><th>RO</th><th>Hours</th></tr></thead><tbody>{preview.rows.map((row, index) => <tr key={`${row.ro}-${index}`}><td>{row.ro}</td><td>{row.hours.toFixed(1)}</td></tr>)}</tbody></table>}
+                    </section>)}
                     <h2>OCR diagnostic output</h2>
                     <p>Review the From/To dates, RO numbers and hours. The output may contain customer or store information, so only share what you're comfortable sharing.</p>
                     <button type="button" onClick={() => void navigator.clipboard.writeText(text)}>Copy OCR Text</button>
