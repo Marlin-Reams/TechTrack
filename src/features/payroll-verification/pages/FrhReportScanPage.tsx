@@ -64,6 +64,7 @@ export default function FrhReportScanPage() {
                     <p><strong>Preview only.</strong> No repairs will be completed or payroll verified by this screen.</p>
                     {previews.map(({ name, preview }) => <section key={name}>
                         <h3>{name}</h3>
+                        <p>Technician: {preview.header.technicianId ?? "Not detected"} · Store: {preview.header.storeId ?? "Not detected"} · Posting window: {preview.header.from ?? "?"} to {preview.header.to ?? "?"} · Printed: {preview.header.printedAt ?? "Not detected"}</p>
                         <p>{preview.rows.length} RO rows found. Parsed total: {preview.calculatedTotal.toFixed(1)} hours. Printed total: {preview.printedTotal === null ? "Not detected" : preview.printedTotal.toFixed(1) + " hours"}.</p>
                         <ul>{preview.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
                         {preview.rows.length > 0 && <table><thead><tr><th>RO</th><th>FRH hours</th><th>TechTrack hours</th><th>Comparison</th></tr></thead><tbody>{compareFrhToRepairs(preview, repairs).map((row, index) => <tr key={`${row.ro}-${index}`}><td>{row.ro}</td><td>{row.frhHours.toFixed(1)}</td><td>{row.techTrackHours === null ? "—" : row.techTrackHours.toFixed(1)}</td><td>{row.status.replaceAll("-", " ")}</td></tr>)}</tbody></table>}
