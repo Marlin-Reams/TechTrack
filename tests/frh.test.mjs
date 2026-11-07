@@ -30,7 +30,7 @@ test("FRH preview stays non-authoritative", () => {
 });
 
 test("duplicate ROs trigger review", () => {
-    const parsed = parseFrhPreview("RO 245194 0.8\nRO 245194 0.8\nTOTAL 1.6");
+    const parsed = parseFrhPreview("RO 245194 0.8\nRO 245194 0.8\nTotal Hours 1.6");
     assert.ok(parsed.warnings.some(warning => warning.includes("appears more than once")));
 });
 
@@ -60,7 +60,7 @@ test("invalid overlapping window is rejected", () => {
 });
 
 test("comparison cannot mark an unvalidated OCR report as exact", () => {
-    const parsed = parseFrhPreview("RO 245194 0.8\nTOTAL 0.8");
+    const parsed = parseFrhPreview("RO 245194 0.8\nTotal Hours 0.8");
     const repair = {
         id: "repair1", status: "active",
         header: { repairOrderNumber: "245194" },
