@@ -109,7 +109,7 @@ test("actual Nov 6 Firestone report layout parses all 15 ROs and totals", () => 
         "Work Order Hours Day Adjusted",
         "Week To Date Total 16.8",
         "Week To Date Total w/Adjustments 16.8",
-    ].join("\\n");
+    ].join("\n");
     const parsed = parseFrhPreview(report);
     assert.equal(parsed.header.technicianId, "09");
     assert.equal(parsed.header.storeId, "023043");
