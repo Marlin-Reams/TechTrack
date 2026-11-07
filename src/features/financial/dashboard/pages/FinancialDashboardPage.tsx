@@ -27,33 +27,9 @@ export default function FinancialDashboardPage() {
 
     useEffect(() => {
 
-        loadDashboard();
+        void FinancialService.getWeeklySummary().then(setSummary).catch(error => console.error("Failed to load financial dashboard.", error)).finally(() => setLoading(false));
 
     }, []);
-
-    async function loadDashboard() {
-
-        try {
-
-            const result =
-                await FinancialService.getWeeklySummary();
-
-            setSummary(result);
-
-        } catch (error) {
-
-            console.error(
-                "Failed to load financial dashboard.",
-                error,
-            );
-
-        } finally {
-
-            setLoading(false);
-
-        }
-
-    }
 
     if (loading) {
 
