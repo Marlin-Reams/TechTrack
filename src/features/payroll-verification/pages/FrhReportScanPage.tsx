@@ -48,7 +48,7 @@ export default function FrhReportScanPage() {
         <main style={{ maxWidth: 900, margin: "0 auto", padding: 20 }}>
             <Link to="/payroll-verification">Back to Payroll Review</Link>
             <h1>Scan FRH Workorder Summary</h1>
-            <p>Development preview: read a Daily or Week-to-Date FRH printout and inspect the OCR result. This does not change any repair or payroll status.</p>
+            <p>TEST MODE ONLY: Read a Daily or Week-to-Date FRH printout and inspect the results. This screen cannot complete repairs, update flagged hours, or verify payroll.</p>
             <label htmlFor="frh-files">Photograph or upload report pages</label>
             <input id="frh-files" type="file" accept="image/*" multiple
                 onChange={event => { setFiles(Array.from(event.target.files ?? [])); setResults([]); setError(""); }} />
@@ -59,7 +59,7 @@ export default function FrhReportScanPage() {
             {error && <p role="alert">{error}</p>}
             {results.length > 0 && (
                 <section>
-                    <h2>FRH extraction preview</h2>
+                    <h2>FRH extraction preview (TEST MODE)</h2>
                     {repairsError && <p role="alert">{repairsError}</p>}
                     <p><strong>Preview only.</strong> No repairs will be completed or payroll verified by this screen.</p>
                     {previews.map(({ name, preview }) => <section key={name}>
