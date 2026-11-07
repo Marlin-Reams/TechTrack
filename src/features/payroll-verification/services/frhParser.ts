@@ -29,11 +29,11 @@ const roundTenths = (value: number) => Math.round(value * 10) / 10;
 export function parseFrhPreview(layoutText: string): FrhParseResult {
     const header: FrhHeader = { technicianId: null, storeId: null, from: null, to: null, printedAt: null };
     const rows: FrhRow[] = [];
-    const technician = layoutText.match(/\\b(?:technician|tech)\\s*(?:id|#|number|no\\.)?\\s*[:#-]?\\s*(\\d{1,5})\\b/i);
-    const store = layoutText.match(/\\bstore\\s*(?:id|#|number|no\\.)?\\s*[:#-]?\\s*(\\d{2,7})\\b/i);
-    const from = layoutText.match(/\\bfrom\\s*[:#-]?\\s*(\\d{1,2}[\\/-]\\d{1,2}[\\/-]\\d{2,4})\\b/i);
-    const to = layoutText.match(/\\bto\\s*[:#-]?\\s*(\\d{1,2}[\\/-]\\d{1,2}[\\/-]\\d{2,4})\\b/i);
-    const printed = layoutText.match(/\\b(?:printed|print date)\\s*[:#-]?\\s*(\\d{1,2}[\\/-]\\d{1,2}[\\/-]\\d{2,4})\\b/i);
+    const technician = layoutText.match(/\b(?:technician|tech)\s*(?:id|#|number|no\.)?\s*[:#-]?\s*(\d{1,5})\b/i);
+    const store = layoutText.match(/\bstore\s*(?:id|#|number|no\.)?\s*[:#-]?\s*(\d{2,7})\b/i);
+    const from = layoutText.match(/\bfrom\s*[:#-]?\s*(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})\b/i);
+    const to = layoutText.match(/\bto\s*[:#-]?\s*(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})\b/i);
+    const printed = layoutText.match(/\b(?:printed|print date)\s*[:#-]?\s*(\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4})\b/i);
     header.technicianId = technician?.[1] ?? null;
     header.storeId = store?.[1] ?? null;
     header.from = from?.[1] ?? null;
