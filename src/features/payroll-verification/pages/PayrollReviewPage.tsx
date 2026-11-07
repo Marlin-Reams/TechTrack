@@ -108,6 +108,7 @@ export default function PayrollReviewPage() {
         <main className={`payroll-review-page ${selectedRepairs.length ? "has-selection" : ""}`}>
             <header className="payroll-review-header">
                 <div><span>PAYROLL WORKSPACE</span><h1>Payroll Review</h1><p>Select everything that matches your payroll, then verify it all at once.</p></div>
+                <Link className="payroll-refresh" to="/payroll-verification/frh-scan">Scan FRH Report</Link>
                 <button type="button" className="payroll-refresh" onClick={() => void loadRepairs()}><RefreshCw size={16} />Refresh</button>
             </header>
 
