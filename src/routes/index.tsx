@@ -28,6 +28,7 @@ import DocumentImportPage
     from "../features/document-import/pages/DocumentImportPage";
 import ReportsPage from "../features/reports/pages/ReportsPage";
 import PayrollReviewPage from "../features/payroll-verification/pages/PayrollReviewPage";
+import FrhReportScanPage from "../features/payroll-verification/pages/FrhReportScanPage";
 import RemindersPage from "../features/reminders/pages/RemindersPage";
 
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
                     {
                         path: "/payroll-verification/:repairId",
                         element: <PayrollVerificationPage />,
+                    },
+                    {
+                        path: "/payroll-verification/frh-scan",
+                        element: <FrhReportScanPage />,
                     },
                     {
                         path: "/payroll-verification",
