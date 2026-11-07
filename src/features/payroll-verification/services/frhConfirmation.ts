@@ -18,7 +18,7 @@ export async function confirmFrhRepair(args: {
 }): Promise<"completed" | "already-completed" | "already-confirmed"> {
     if (!args.reviewedByUser) throw new Error("Explicit FRH review is required.");
     const { snapshot, repairId, ro, hours } = args;
-    if (!snapshot.id || !snapshot.technicianId || !snapshot.storeId ||
+    if (!snapshot.id || snapshot.id.includes("/") || !snapshot.technicianId || !snapshot.storeId ||
         !snapshot.from || !snapshot.to || !snapshot.printedAt ||
         !/^\d{5,7}$/.test(ro) || !Number.isFinite(hours) || hours < 0) {
         throw new Error("FRH report metadata is incomplete.");
@@ -63,6 +63,9 @@ export async function confirmFrhRepair(args: {
             payrollStatus, confirmedAt: serverTimestamp(),
         });
         if (!alreadyCompleted) {
+            if (!repair.completedDate && !repair.header?.repairDate) {
+                throw new Error("Original repair date is missing; manual review required.");
+            }
             // Preserve every other repair field, including the existing payroll state.
             transaction.update(repairRef, {
                 status: "completed",
