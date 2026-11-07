@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react";
+import { getRepairs } from "../../repairs/repository/repairRepository";
+import type { StoredRepair } from "../../repairs/types/StoredRepair";
+import { compareFrhToRepairs } from "../services/frhReconciliation";
+import { Link } from "react-router-dom";
+import { scanRepairOrder } from "../../document-import/services/ocr/ocrApi";
+import { parseFrhPreview } from "../services/frhParser";
+
+export default function FrhReportScanPage() {
+    const [files, setFiles] = useState<File[]>([]);
+    const [repairs, setRepairs] = useState<StoredRepair[]>([]);
+    const [repairsError, setRepairsError] = useState("");
+    useEffect(() => {
+        let active = true;
+        void getRepairs().then(items => { if (active) setRepairs(items); }).catch(() => { if (active) setRepairsError("Could not load TechTrack repairs for comparison."); });
+        return () => { active = false; };
+    }, []);
+    const [busy, setBusy] = useState(false);
+    const [error, setError] = useState("");
+    const [results, setResults] = useState<Array<{ name: string; normalizedText: string; layoutText: string }>>([]);
+
+    async function scan() {
+        if (!files.length || busy) return;
+        setBusy(true);
+        setError("");
+        setResults([]);
+        try {
+            const output = [];
+            for (const file of files) {
+                const result = await scanRepairOrder(file);
+                output.push({ name: file.name, ...result });
+            }
+            setResults(output);
+        } catch (cause) {
+            setError(cause instanceof Error ? cause.message : "Unable to read FRH report.");
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    const previews = results.map(result => ({ name: result.name, preview: parseFrhPreview(result.layoutText || result.normalizedText) }));
+
+    const text = results.map(result =>
+        `=== ${result.name} ===\nLAYOUT TEXT\n${result.layoutText}\n\nNORMALIZED TEXT\n${result.normalizedText}`
+    ).join("\n\n");
+
+    return (
+        <main style={{ maxWidth: 900, margin: "0 auto", padding: 20 }}>
+            <Link to="/payroll-verification">Back to Payroll Review</Link>
+            <h1>Scan FRH Workorder Summary</h1>
+            <p>TEST MODE ONLY: Read a Daily or Week-to-Date FRH printout and inspect the results. This screen cannot complete repairs, update flagged hours, or verify payroll.</p>
+            <label htmlFor="frh-files">Photograph or upload report pages</label>
+            <input id="frh-files" type="file" accept="image/*" multiple
+                onChange={event => { setFiles(Array.from(event.target.files ?? [])); setResults([]); setError(""); }} />
+            <p>{files.length} page(s) selected</p>
+            <button type="button" onClick={() => void scan()} disabled={busy || !files.length}>
+                {busy ? "Reading report..." : "Read FRH Report"}
+            </button>
+            {error && <p role="alert">{error}</p>}
+            {results.length > 0 && (
+                <section>
+                    <h2>FRH extraction preview (TEST MODE)</h2>
+                    {repairsError && <p role="alert">{repairsError}</p>}
+                    <p><strong>Preview only.</strong> No repairs will be completed or payroll verified by this screen.</p>
+                    {previews.map(({ name, preview }) => <section key={name}>
+                        <h3>{name}</h3>
+                        <p>Technician: {preview.header.technicianId ?? "Not detected"} · Store: {preview.header.storeId ?? "Not detected"} · Posting window: {preview.header.from ?? "?"} to {preview.header.to ?? "?"} · Printed: {preview.header.printedAt ?? "Not detected"}</p>
+                        <p>{preview.rows.length} RO rows found. Parsed total: {preview.calculatedTotal.toFixed(1)} hours. Printed total: {preview.printedTotal === null ? "Not detected" : preview.printedTotal.toFixed(1) + " hours"}.</p>
+                        <ul>{preview.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
+                        {preview.rows.length > 0 && <table><thead><tr><th>RO</th><th>FRH hours</th><th>TechTrack hours</th><th>Comparison</th></tr></thead><tbody>{compareFrhToRepairs(preview, repairs).map((row, index) => <tr key={`${row.ro}-${index}`}><td>{row.ro}</td><td>{row.frhHours.toFixed(1)}</td><td>{row.techTrackHours === null ? "—" : row.techTrackHours.toFixed(1)}</td><td>{row.status.replaceAll("-", " ")}</td></tr>)}</tbody></table>}
+                    </section>)}
+                    <h2>OCR diagnostic output</h2>
+                    <p>Review the From/To dates, RO numbers and hours. The output may contain customer or store information, so only share what you're comfortable sharing.</p>
+                    <button type="button" onClick={() => void navigator.clipboard.writeText(text)}>Copy OCR Text</button>
+                    <textarea readOnly aria-label="FRH OCR text" value={text} rows={24}
+                        style={{ display: "block", width: "100%", marginTop: 12, fontFamily: "monospace" }} />
+                </section>
+            )}
+        </main>
+    );
+}

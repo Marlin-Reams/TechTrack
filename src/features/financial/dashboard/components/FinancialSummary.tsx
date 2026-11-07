@@ -15,26 +15,9 @@ export default function FinancialSummary() {
 
     useEffect(() => {
 
-        loadSummary();
+        void financialService.getWeeklySummary().then(setSummary).finally(() => setLoading(false));
 
     }, []);
-
-    async function loadSummary() {
-
-        try {
-
-            const result =
-                await financialService.getWeeklySummary();
-
-            setSummary(result);
-
-        } finally {
-
-            setLoading(false);
-
-        }
-
-    }
 
     if (loading) {
 

@@ -14,8 +14,9 @@ export default function PaystubList({ refreshKey }: PaystubListProps) {
     const [view, setView] = useState<ViewMode>("list");
     const [month, setMonth] = useState(() => new Date());
 
-    useEffect(() => { void loadPaystubs(); }, [refreshKey]);
-    async function loadPaystubs() {
+    useEffect(() => {
+        // Refresh whenever the parent signals a new paystub.
+        void (async () => {
         setLoading(true); setError("");
         try {
             const sorted = [...await getPaystubs()].sort((a, b) => paystubTime(b) - paystubTime(a));
@@ -24,7 +25,8 @@ export default function PaystubList({ refreshKey }: PaystubListProps) {
             if (latest) setMonth(new Date(latest.getFullYear(), latest.getMonth(), 1));
         } catch { setError("Unable to load paystubs."); }
         finally { setLoading(false); }
-    }
+        })();
+    }, [refreshKey]);
 
     const monthPaystubs = useMemo(() => paystubs.filter(paystub => {
         const date = paystubDate(paystub);

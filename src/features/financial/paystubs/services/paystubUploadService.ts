@@ -150,6 +150,6 @@ async function processPaystub(
 
         );
 
-        throw new Error(message);
+        throw new Error(message, { cause: error });
     }
 }

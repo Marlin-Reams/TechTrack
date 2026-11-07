@@ -1,0 +1,33 @@
+name: FRH feature checks
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig*.json"
+      - ".github/workflows/frh-check.yml"
+  push:
+    branches:
+      - feature/frh-report-scanner
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: node --experimental-strip-types --test tests/frh.test.mjs
+      - run: npm run build
+      # Existing repository-wide lint debt is tracked separately. Require lint on
+      # the FRH scanner and its integration, without suppressing their errors.
+      - name: Lint FRH scanner changes
+        run: npx eslint src/features/payroll-verification/pages/FrhReportScanPage.tsx src/features/payroll-verification/services/frhParser.ts src/features/payroll-verification/services/frhReconciliation.ts src/features/payroll-verification/services/frhSnapshots.ts src/features/payroll-verification/services/frhConfirmation.ts
+      - run: npm run check:ocr

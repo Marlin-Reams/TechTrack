@@ -14,7 +14,7 @@ import { parsePayPeriod } from "./parsers/payPeriodParser";
 import { parseDeductions } from "./parsers/deductionsParser";
 import { parseNetPay } from "./parsers/netPayParser";
 import { parseEarnings } from "./parsers/earningsParser";
-import { parseTaxes } from "./parsers/taxesParser"; const parseTaxBases = (_section: string) => ({});
+import { parseTaxes } from "./parsers/taxesParser"; const parseTaxBases = () => ({});
 
 
 class FirestonePaystubParser implements PaystubParser {
@@ -66,9 +66,7 @@ class FirestonePaystubParser implements PaystubParser {
                     ),
 
                 taxBases:
-                    parseTaxBases(
-                        sections.taxBases
-                    ),
+                    parseTaxBases(),
 
                 netPay:
                     parseNetPay(
