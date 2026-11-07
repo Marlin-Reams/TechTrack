@@ -21,7 +21,7 @@ test("FRH preview stays non-authoritative", () => {
     const parsed = parseFrhPreview(
         "Tech 09\nStore 12345\nFrom 11/02/2026\nTo 11/04/2026\nPrinted 11/04/2026\n" +
         rows.map(row => `RO ${row.ro} ${row.hours.toFixed(1)}`).join("\n") +
-        "\nTOTAL 7.4"
+        "\nTotal Hours 7.4"
     );
     assert.equal(parsed.rows.length, 6);
     assert.equal(parsed.calculatedTotal, 7.4);
@@ -75,7 +75,7 @@ test("Nov 5 printed 13.3 total is flagged against listed 13.9 hours", () => {
         ...rows.map(row => `RO ${row.ro} ${row.hours.toFixed(1)}`),
         "RO 245229 1.8", "RO 245226 2.6", "RO 245227 1.2",
         "RO 245228 0.3", "RO 245236 0.6",
-        "TOTAL 13.3",
+        "Total Hours 13.3",
     ].join("\n");
     const parsed = parseFrhPreview(text);
     assert.equal(parsed.calculatedTotal, 13.9);
