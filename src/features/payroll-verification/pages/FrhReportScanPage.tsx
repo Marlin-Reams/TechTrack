@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getRepairs } from "../../repairs/repository/repairRepository";
+import type { StoredRepair } from "../../repairs/types/StoredRepair";
+import { compareFrhToRepairs } from "../services/frhReconciliation";
 import { Link } from "react-router-dom";
 import { scanRepairOrder } from "../../document-import/services/ocr/ocrApi";
 import { parseFrhPreview } from "../services/frhParser";
 
 export default function FrhReportScanPage() {
     const [files, setFiles] = useState<File[]>([]);
+    const [repairs, setRepairs] = useState<StoredRepair[]>([]);
+    const [repairsError, setRepairsError] = useState("");
+    useEffect(() => {
+        let active = true;
+        void getRepairs().then(items => { if (active) setRepairs(items); }).catch(() => { if (active) setRepairsError("Could not load TechTrack repairs for comparison."); });
+        return () => { active = false; };
+    }, []);
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState("");
     const [results, setResults] = useState<Array<{ name: string; normalizedText: string; layoutText: string }>>([]);
@@ -50,12 +60,13 @@ export default function FrhReportScanPage() {
             {results.length > 0 && (
                 <section>
                     <h2>FRH extraction preview</h2>
+                    {repairsError && <p role="alert">{repairsError}</p>}
                     <p><strong>Preview only.</strong> No repairs will be completed or payroll verified by this screen.</p>
                     {previews.map(({ name, preview }) => <section key={name}>
                         <h3>{name}</h3>
                         <p>{preview.rows.length} RO rows found. Parsed total: {preview.calculatedTotal.toFixed(1)} hours. Printed total: {preview.printedTotal === null ? "Not detected" : preview.printedTotal.toFixed(1) + " hours"}.</p>
                         <ul>{preview.warnings.map((warning, index) => <li key={index}>{warning}</li>)}</ul>
-                        {preview.rows.length > 0 && <table><thead><tr><th>RO</th><th>Hours</th></tr></thead><tbody>{preview.rows.map((row, index) => <tr key={`${row.ro}-${index}`}><td>{row.ro}</td><td>{row.hours.toFixed(1)}</td></tr>)}</tbody></table>}
+                        {preview.rows.length > 0 && <table><thead><tr><th>RO</th><th>FRH hours</th><th>TechTrack hours</th><th>Comparison</th></tr></thead><tbody>{compareFrhToRepairs(preview, repairs).map((row, index) => <tr key={`${row.ro}-${index}`}><td>{row.ro}</td><td>{row.frhHours.toFixed(1)}</td><td>{row.techTrackHours === null ? "—" : row.techTrackHours.toFixed(1)}</td><td>{row.status.replaceAll("-", " ")}</td></tr>)}</tbody></table>}
                     </section>)}
                     <h2>OCR diagnostic output</h2>
                     <p>Review the From/To dates, RO numbers and hours. The output may contain customer or store information, so only share what you're comfortable sharing.</p>
