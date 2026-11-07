@@ -66,7 +66,8 @@ export async function confirmFrhRepair(args: {
             // Preserve every other repair field, including the existing payroll state.
             transaction.update(repairRef, {
                 status: "completed",
-                completedDate: new Date().toISOString().slice(0, 10),
+                // Posting window is not the work date. Preserve original repair date.
+                completedDate: repair.completedDate || repair.header?.repairDate,
                 updatedAt: serverTimestamp(),
             });
         }
