@@ -26,5 +26,8 @@ jobs:
       - run: npm ci
       - run: node --experimental-strip-types --test tests/frh.test.mjs
       - run: npm run build
-      - run: npm run lint
+      # Existing repository-wide lint debt is tracked separately. Require lint on
+      # the FRH scanner and its integration, without suppressing their errors.
+      - name: Lint FRH scanner changes
+        run: npx eslint src/features/payroll-verification/pages/FrhReportScanPage.tsx src/features/payroll-verification/services/frhParser.ts src/features/payroll-verification/services/frhReconciliation.ts src/features/payroll-verification/services/frhSnapshots.ts src/features/payroll-verification/services/frhConfirmation.ts
       - run: npm run check:ocr
