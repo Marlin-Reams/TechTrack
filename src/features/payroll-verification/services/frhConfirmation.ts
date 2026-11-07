@@ -15,8 +15,9 @@ export async function confirmFrhRepair(args: {
     ro: string;
     hours: number;
     reviewedByUser: boolean;
+    reportValid: boolean;
 }): Promise<"completed" | "already-completed" | "already-confirmed"> {
-    if (!args.reviewedByUser) throw new Error("Explicit FRH review is required.");
+    if (!args.reviewedByUser || !args.reportValid) throw new Error("Validated FRH report and explicit review are required.");
     const { snapshot, repairId, ro, hours } = args;
     if (!snapshot.id || snapshot.id.includes("/") || !snapshot.technicianId || !snapshot.storeId ||
         !snapshot.from || !snapshot.to || !snapshot.printedAt ||
@@ -26,6 +27,9 @@ export async function confirmFrhRepair(args: {
     if (snapshot.rows.filter(row => row.ro === ro && Math.round(row.hours * 100) === Math.round(hours * 100)).length !== 1 ||
         snapshot.rows.filter(row => row.ro === ro).length !== 1) {
         throw new Error("FRH row must be unique and match the reviewed snapshot.");
+    }
+    if (!snapshot.rows.length || snapshot.rows.some(row => !Number.isFinite(row.hours))) {
+        throw new Error("FRH snapshot contains invalid rows.");
     }
     const userId = getCurrentUserId();
     const repairRef = doc(db, "users", userId, "repairs", repairId);
