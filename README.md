@@ -1,101 +1,70 @@
 # TechTrack
 
-A modern, production-quality web application built for professional automotive technicians.
+**A real-world automotive technician productivity and repair management platform.**
 
-TechTrack is designed to streamline the daily workflow of technicians by combining repair order management, customer and vehicle tracking, diagnostics, inspections, productivity tools, and AI-assisted troubleshooting into a single platform.
+TechTrack is a full-stack web application designed to help automotive technicians manage repair orders, track flagged labor hours, verify payroll, and organize daily work.
 
----
+The project was created to solve practical challenges encountered in professional automotive repair environments and continues to evolve through real-world use and feedback.
 
-## Vision
+## Key Features
 
-Our goal is to build the ultimate productivity platform for automotive technicians and independent repair shops.
+### Repair Order Management
+- Record and organize repair orders and labor operations.
+- Search and filter repair history.
+- Track repair status and verification progress.
+- Organize repair records by date.
 
-TechTrack emphasizes:
+### Labor Tracking and Payroll Verification
+- Track flagged labor hours and technician productivity.
+- Compare calculated earnings against reported compensation.
+- Identify discrepancies requiring verification.
+- Monitor weekly performance and earnings.
 
-- Fast workflows
-- Clean user experience
-- Reliable data
-- Scalable architecture
-- AI-assisted diagnostics
-- Long-term maintainability
+### Document Scanning and Data Extraction
+- Repair-order and technician work-summary scanning workflows.
+- OCR-based document processing and parsing.
+- Document normalization and structured data extraction.
+- Automated checks for supported work-summary formats.
 
----
+### Application Infrastructure
+- Firebase Authentication and protected routes.
+- Cloud Firestore data persistence.
+- Firebase Storage integration.
+- Firebase Hosting deployment.
+- Modular application architecture and service-layer separation.
 
-## Planned Features
+## Technology Stack
 
-### Shop Management
+| Area | Technologies |
+|---|---|
+| Frontend | React 19, TypeScript, Vite |
+| Routing | React Router |
+| Backend | Firebase Cloud Functions |
+| Database | Cloud Firestore |
+| Authentication | Firebase Authentication |
+| Storage | Firebase Storage |
+| Hosting | Firebase Hosting |
+| Document Processing | OCR, PDF.js |
+| Development | Git, GitHub, ESLint, TypeScript |
 
-- Repair Orders
-- Customers
-- Vehicles
-- Digital Vehicle Inspections
-- Labor Tracking
-- Technician Notes
+## Architecture
 
-### Productivity
+TechTrack follows a modular architecture emphasizing separation of concerns, maintainability, and incremental development.
 
-- Dashboard
-- Daily Work Queue
-- Vehicle History
-- Search
-- Reporting
-- Analytics
+The application separates presentation components, business logic, service integrations, and data persistence.
 
-### AI
+The project includes frontend application code, backend functions, document-processing utilities, and automated checks.
 
-- Diagnostic Assistant
-- Symptom Analysis
-- Guided Troubleshooting
-- Repair Suggestions
+Additional architecture and development standards are documented in [PROJECT.md](PROJECT.md).
 
----
+## Getting Started
 
-## Technology
+Clone the repository:
 
-Frontend
-
-- React
-- TypeScript
-- Vite
-- React Router
-
-Backend
-
-- Firebase Authentication
-- Cloud Firestore
-- Firebase Storage
-- Firebase Hosting
-
----
-
-## Current Status
-
-Current Version
-
-**v0.1.0 — Foundation Complete**
-
-Current Progress
-
-- ✅ Application architecture
-- ✅ Authentication
-- ✅ Routing
-- ✅ Firebase integration
-- ✅ Production deployment
-
-Business feature development begins next.
-
----
-
-## Documentation
-
-Additional documentation is available in:
-
-- `PROJECT.md` — Project architecture and development standards
-- `CHANGELOG.md` — Project release history
-
----
-
-## Development
+```bash
+git clone https://github.com/Marlin-Reams/TechTrack.git
+cd TechTrack
+```
 
 Install dependencies:
 
@@ -103,38 +72,41 @@ Install dependencies:
 npm install
 ```
 
-Start the development server:
+Configure the required Firebase environment variables for your development environment.
+
+Start the application:
 
 ```bash
 npm run dev
 ```
 
-Create a production build:
+Run available checks:
 
 ```bash
+npm run lint
 npm run build
 ```
 
-Deploy to Firebase:
+The repository also includes document-processing checks and test resources.
 
-```bash
-npm run deploy
-```
+## Development Status
 
----
+**Active development — evolving personal software project.**
 
-## Philosophy
+TechTrack is an ongoing project with implemented application functionality and additional features under development.
 
-TechTrack is built with a simple philosophy:
+Current development priorities include improving document scanning reliability, expanding payroll verification workflows, strengthening automated testing, and refining the technician experience.
 
-> Build software that remains understandable, maintainable, and extensible years after the first line of code is written.
+The project is developed with AI-assisted coding tools alongside manual review, debugging, testing, and architectural decision-making.
 
-Every architectural decision is made with long-term maintainability in mind.
+## Project Motivation
 
----
+As an automotive technician with software engineering training, I wanted a system that addressed challenges I encounter in my daily work.
 
-## License
+TechTrack combines practical automotive industry knowledge with modern software development to create tools that support technicians rather than requiring them to adapt to generic software.
 
-Copyright © 2026 TechTrack.
+## Ownership
 
-All rights reserved.
+TechTrack is an independently developed personal project.
+
+Copyright © 2026 TechTrack. All rights reserved.
